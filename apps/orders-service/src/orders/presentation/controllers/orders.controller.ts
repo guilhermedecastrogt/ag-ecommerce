@@ -1,11 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
-import { CreateOrderUseCase } from './orders/application/use-cases/create-order.use-case';
-import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-orders.use-case';
-import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-user.use-case';
+import { CreateOrderUseCase } from '../../application/use-cases/create-order.use-case';
+import { FindAllOrdersUseCase } from '../../application/use-cases/find-all-orders.use-case';
+import { SyncKnownUserUseCase } from '../../application/use-cases/sync-known-user.use-case';
 
 @Controller()
-export class OrdersServiceController {
+export class OrdersController {
   constructor(
     private readonly createOrderUseCase: CreateOrderUseCase,
     private readonly findAllOrdersUseCase: FindAllOrdersUseCase,
