@@ -1,0 +1,104 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    container_name: ms-study-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    container_name: ms-study-kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    depends_on:
+      zookeeper:
+        condition: service_started
+
+  mysql:
+    image: mysql:8.4
+    container_name: ms-study-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: study_ms
+    ports:
+      - '3307:3306'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-proot']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  users-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-study-users-service
+    environment:
+      PORT: 4001
+      HOST: 0.0.0.0
+      DATABASE_URL: mysql://root:root@mysql:3306/study_ms
+      KAFKA_BROKER: kafka:9092
+    command: sh -c "npm run prisma:generate && npm run db:push && npm run start:users"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    ports:
+      - '4001:4001'
+
+  orders-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-study-orders-service
+    environment:
+      PORT: 4002
+      HOST: 0.0.0.0
+      DATABASE_URL: mysql://root:root@mysql:3306/study_ms
+      KAFKA_BROKER: kafka:9092
+    command: sh -c "npm run prisma:generate && npm run start:orders"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      users-service:
+        condition: service_started
+      kafka:
+        condition: service_started
+    ports:
+      - '4002:4002'
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-study-api-gateway
+    environment:
+      PORT: 3000
+      USERS_SERVICE_HOST: users-service
+      USERS_SERVICE_PORT: 4001
+      ORDERS_SERVICE_HOST: orders-service
+      ORDERS_SERVICE_PORT: 4002
+    command: npm run start:gateway
+    depends_on:
+      users-service:
+        condition: service_started
+      orders-service:
+        condition: service_started
+    ports:
+      - '3010:3000'
+
+volumes:
+  mysql_data:
