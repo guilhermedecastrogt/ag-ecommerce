@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "npm run prisma:generate && nest build api-gateway && nest build users-service && nest build orders-service",
+    "build": "npm run prisma:generate && nest build api-gateway && nest build users-service && nest build orders-service && nest build auth-service",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "npm run start:gateway",
     "start:dev": "nest start --watch",
@@ -15,9 +15,12 @@
     "start:gateway": "nest start api-gateway",
     "start:users": "nest start users-service",
     "start:orders": "nest start orders-service",
+    "start:auth": "nest start auth-service",
+    "start:repl": "nest start --entryFile repl",
     "start:gateway:dev": "nest start api-gateway --watch",
     "start:users:dev": "nest start users-service --watch",
     "start:orders:dev": "nest start orders-service --watch",
+    "start:auth:dev": "nest start auth-service --watch",
     "start:gateway:prod": "node dist/apps/api-gateway/main.js",
     "start:users:prod": "node dist/apps/users-service/main.js",
     "start:orders:prod": "node dist/apps/orders-service/main.js",
@@ -34,13 +37,17 @@
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
-    "@nestjs/microservices": "^11.1.16",
+    "@nestjs/jwt": "^11.0.2",
+    "@nestjs/microservices": "^11.1.17",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "^6.17.1",
+    "argon2": "^0.44.0",
     "kafkajs": "^2.2.4",
+    "nestjs-zod": "^5.1.1",
     "prisma": "^6.17.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
