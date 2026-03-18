@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { OrdersServiceController } from './orders-service.controller';
 import { OrdersPrismaService } from './orders-prisma.service';
 import { CreateOrderUseCase } from './orders/application/use-cases/create-order.use-case';
 import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-orders.use-case';
@@ -8,6 +7,7 @@ import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-
 import { KafkaOrdersEventsPublisher } from './orders/infrastructure/messaging/kafka-orders-events.publisher';
 import { PrismaKnownUsersRepository } from './orders/infrastructure/persistence/prisma-known-users.repository';
 import { PrismaOrdersRepository } from './orders/infrastructure/persistence/prisma-orders.repository';
+import { OrdersController } from './orders/presentation/controllers/orders.controller';
 import {
   KNOWN_USERS_REPOSITORY,
   ORDERS_EVENTS_PUBLISHER,
@@ -30,7 +30,7 @@ import {
       },
     ]),
   ],
-  controllers: [OrdersServiceController],
+  controllers: [OrdersController],
   providers: [
     OrdersPrismaService,
     CreateOrderUseCase,

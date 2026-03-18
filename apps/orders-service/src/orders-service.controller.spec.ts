@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrdersServiceController } from './orders-service.controller';
+import { OrdersController } from './orders/presentation/controllers/orders.controller';
 import { CreateOrderUseCase } from './orders/application/use-cases/create-order.use-case';
 import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-orders.use-case';
 import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-user.use-case';
 
 describe('OrdersServiceController', () => {
-  let ordersServiceController: OrdersServiceController;
+  let ordersServiceController: OrdersController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [OrdersServiceController],
+      controllers: [OrdersController],
       providers: [
         {
           provide: CreateOrderUseCase,
@@ -32,9 +32,7 @@ describe('OrdersServiceController', () => {
       ],
     }).compile();
 
-    ordersServiceController = app.get<OrdersServiceController>(
-      OrdersServiceController,
-    );
+    ordersServiceController = app.get<OrdersController>(OrdersController);
   });
 
   describe('root', () => {
