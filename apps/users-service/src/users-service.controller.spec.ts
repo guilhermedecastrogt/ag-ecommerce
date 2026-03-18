@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersServiceController } from './users-service.controller';
+import { UsersController } from './users/presentation/controllers/users.controller';
 import { CreateUserUseCase } from './users/application/use-cases/create-user.use-case';
 import { FindAllUsersUseCase } from './users/application/use-cases/find-all-users.use-case';
 import { FindUserByIdUseCase } from './users/application/use-cases/find-user-by-id.use-case';
 
 describe('UsersServiceController', () => {
-  let usersServiceController: UsersServiceController;
+  let usersServiceController: UsersController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [UsersServiceController],
+      controllers: [UsersController],
       providers: [
         {
           provide: CreateUserUseCase,
@@ -32,9 +32,7 @@ describe('UsersServiceController', () => {
       ],
     }).compile();
 
-    usersServiceController = app.get<UsersServiceController>(
-      UsersServiceController,
-    );
+    usersServiceController = app.get<UsersController>(UsersController);
   });
 
   describe('root', () => {

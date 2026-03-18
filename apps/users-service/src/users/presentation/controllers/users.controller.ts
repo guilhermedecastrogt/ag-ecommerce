@@ -1,11 +1,11 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { CreateUserUseCase } from './users/application/use-cases/create-user.use-case';
-import { FindAllUsersUseCase } from './users/application/use-cases/find-all-users.use-case';
-import { FindUserByIdUseCase } from './users/application/use-cases/find-user-by-id.use-case';
+import { CreateUserUseCase } from '../../application/use-cases/create-user.use-case';
+import { FindAllUsersUseCase } from '../../application/use-cases/find-all-users.use-case';
+import { FindUserByIdUseCase } from '../../application/use-cases/find-user-by-id.use-case';
 
 @Controller()
-export class UsersServiceController {
+export class UsersController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly findAllUsersUseCase: FindAllUsersUseCase,
