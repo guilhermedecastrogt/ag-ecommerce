@@ -27,3 +27,23 @@ model KnownUser {
   email     String   @unique
   createdAt DateTime
 }
+
+model AuthUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  status       String   @default("ACTIVE") // ACTIVE, INACTIVE, BLOCKED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sessions     RefreshSession[]
+}
+
+model RefreshSession {
+  id        Int      @id @default(autoincrement())
+  jti       String   @unique // JWT ID
+  userId    Int
+  user      AuthUser @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+}

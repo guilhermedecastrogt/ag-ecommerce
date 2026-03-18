@@ -9,7 +9,7 @@ import { ApiGatewayController } from './api-gateway.controller';
         name: 'USERS_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: process.env.USERS_SERVICE_HOST ?? 'users-service',
+          host: process.env.USERS_SERVICE_HOST ?? 'localhost',
           port: Number(process.env.USERS_SERVICE_PORT ?? 4001),
         },
       },
@@ -17,8 +17,16 @@ import { ApiGatewayController } from './api-gateway.controller';
         name: 'ORDERS_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: process.env.ORDERS_SERVICE_HOST ?? 'orders-service',
+          host: process.env.ORDERS_SERVICE_HOST ?? 'localhost',
           port: Number(process.env.ORDERS_SERVICE_PORT ?? 4002),
+        },
+      },
+      {
+        name: 'AUTH_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.AUTH_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.AUTH_SERVICE_PORT ?? 4003),
         },
       },
     ]),
