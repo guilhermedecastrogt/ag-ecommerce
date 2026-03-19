@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend E-commerce (Next.js)
 
-## Getting Started
+Este app é o frontend do monorepo, iniciado sem integração com os microsserviços para evolução incremental.
 
-First, run the development server:
+## Executando
+
+No diretório raiz do monorepo:
+
+```bash
+npm run start:frontend
+```
+
+Ou dentro de `apps/frontend`:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+src
+├── app
+│   ├── (store)      # navegação pública da loja
+│   ├── (auth)       # login e cadastro
+│   └── (account)    # área autenticada do cliente
+├── features
+│   ├── catalog
+│   ├── cart
+│   ├── checkout
+│   └── auth
+├── widgets          # blocos compostos (header, footer, shell)
+└── shared           # utilitários, tipos, config e UI base
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Organização por feature
 
-## Learn More
+Cada feature pode usar os blocos:
 
-To learn more about Next.js, take a look at the following resources:
+- `domain`: tipos e regras de negócio
+- `application`: casos de uso
+- `infrastructure`: repositórios/adapters
+- `presentation`: componentes e composição de UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Rotas iniciais
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/` home da loja
+- `/produtos`
+- `/categorias/[slug]`
+- `/carrinho`
+- `/checkout`
+- `/entrar`
+- `/cadastro`
+- `/conta`
 
-## Deploy on Vercel
+## Qualidade
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint:frontend
+npm run build:frontend
+```
