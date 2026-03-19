@@ -26,7 +26,7 @@
     "start:orders:prod": "node dist/apps/orders-service/main.js",
     "prisma:generate": "prisma generate",
     "db:push": "prisma db push",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix --ignore-pattern \"apps/frontend/**\"",
     "typecheck": "npm run prisma:generate && tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -35,7 +35,10 @@
     "test:e2e": "jest --config ./apps/microsservices/test/jest-e2e.json",
     "start:product": "nest start product-service",
     "start:product:dev": "nest start product-service --watch",
-    "start:product:prod": "node dist/apps/product-service/main.js"
+    "start:product:prod": "node dist/apps/product-service/main.js",
+    "start:frontend": "npm --prefix apps/frontend run dev",
+    "build:frontend": "npm --prefix apps/frontend run build",
+    "lint:frontend": "npm --prefix apps/frontend run lint"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

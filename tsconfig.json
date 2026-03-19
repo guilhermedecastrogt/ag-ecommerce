@@ -22,5 +22,6 @@
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {}
-  }
+  },
+  "exclude": ["apps/frontend/**/*"]
 }
