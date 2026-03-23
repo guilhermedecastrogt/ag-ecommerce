@@ -74,7 +74,7 @@ export default function Hero() {
   const counts = [c0, c1, c2];
 
   return (
-    <section id="inicio" ref={ref} onMouseMove={onMove} className="relative min-h-[100dvh] overflow-hidden bg-[#001429]">
+    <div ref={ref} onMouseMove={onMove} className="relative h-[100dvh] overflow-hidden bg-[#001429]">
 
       {/* ═══ BACKGROUND ═══════════════════════════════ */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#001429] via-[#003966] to-[#002244]" />
@@ -110,7 +110,7 @@ export default function Hero() {
         {/* Glow behind */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full blur-[90px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(223,4,11,0.45) 0%, rgba(0,57,102,0.2) 60%, transparent 80%)", animation: "heroPulse 4s ease-in-out infinite" }} />
 
-        {/* Orbit rings — fixed size */}
+        {/* Orbit rings */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] border border-dashed border-white/[0.04] rounded-full pointer-events-none" style={{ animation: "heroSpin 100s linear infinite" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] border border-dashed border-white/[0.03] rounded-full pointer-events-none" style={{ animation: "heroSpin 140s linear infinite reverse" }} />
 
@@ -127,7 +127,7 @@ export default function Hero() {
           {[...Array(12)].map((_, i) => <div key={i} className="absolute top-1/2 left-1/2 h-px bg-gradient-to-r from-white/70 to-transparent origin-left" style={{ width: "50%", transform: `rotate(${i * 30}deg)` }} />)}
         </div>
 
-        {/* Image — large, floating, parallax */}
+        {/* Image */}
         <div
           className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[470px] md:h-[470px] lg:w-[540px] lg:h-[540px] xl:w-[550px] xl:h-[550px]"
           style={{ animation: "heroFloat 6s ease-in-out infinite", transform: `translate(${m.x * -10}px,${m.y * -7}px)`, transition: "transform .7s cubic-bezier(.16,1,.3,1)" }}
@@ -140,13 +140,12 @@ export default function Hero() {
             style={{ filter: "contrast(1.12) saturate(1.15) brightness(1.06) drop-shadow(0 0 80px rgba(223,4,11,0.25)) drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }}
             priority
           />
-          {/* Sheen */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ animation: "heroSheen 6s ease-in-out infinite" }}>
             <div className="absolute -top-full -left-1/2 w-[200%] h-[200%] opacity-[0.05]" style={{ background: "linear-gradient(110deg, transparent 42%, rgba(255,255,255,0.9) 46%, rgba(255,255,255,0.3) 50%, transparent 54%)" }} />
           </div>
         </div>
 
-        {/* Tags — pushed further out from the image */}
+        {/* Tags */}
         <div className={`absolute -top-[5%] -right-[8%] bg-[#0B1220]/60 backdrop-blur-xl border border-white/[0.1] rounded-xl px-4 py-2.5 transition-all duration-700 ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`} style={{ transitionDelay: "1.2s", animation: "heroTagA 5s ease-in-out infinite" }}>
           <span className="text-[0.55rem] text-white/35 font-bold tracking-[0.18em] uppercase block">Bancada</span>
           <span className="text-white font-[var(--font-display)] font-bold text-sm tracking-wider leading-tight">BOSCH EPS 708</span>
@@ -161,17 +160,15 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ═══ TEXT CONTENT — left side, z above image ══ */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 min-h-[100dvh] flex items-center">
-        <div className="max-w-[560px] xl:max-w-[620px] py-32 lg:py-20">
+      {/* ═══ TEXT CONTENT ══════════════════════════════ */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 h-full flex items-center">
+        <div className="max-w-[560px] xl:max-w-[620px] py-20 lg:py-12">
 
-          {/* Badge */}
           <div className={`inline-flex items-center gap-2 bg-white/[0.06] backdrop-blur border border-white/[0.08] rounded-full px-4 py-2 mb-7 transition-all duration-600 ${on ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"}`}>
             <span className="relative flex h-2 w-2"><span className="animate-ping absolute inset-0 rounded-full bg-red opacity-75" /><span className="relative rounded-full h-2 w-2 bg-red inline-flex" /></span>
             <span className="text-white/70 text-[0.65rem] font-semibold tracking-[0.2em] uppercase">Do laboratório à estrada</span>
           </div>
 
-          {/* Headline */}
           <h1 className={`font-[var(--font-display)] text-white font-extrabold uppercase tracking-[0.02em] leading-[0.94] mb-6 transition-all duration-700 text-[2.6rem] sm:text-[3.4rem] lg:text-[4rem] xl:text-[4.6rem] ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "100ms" }}>
             Diagnóstico e{" "}
             <span className="relative whitespace-nowrap">
@@ -182,12 +179,10 @@ export default function Hero() {
             em Sistemas Diesel
           </h1>
 
-          {/* Sub */}
           <p className={`text-white/50 text-base sm:text-lg lg:text-xl leading-relaxed mb-9 max-w-[480px] transition-all duration-700 ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "200ms" }}>
             Serviços, testes e manutenção com infraestrutura de laboratório e atendimento especializado há mais de 50 anos.
           </p>
 
-          {/* CTAs */}
           <div className={`flex flex-wrap gap-3 mb-8 transition-all duration-700 ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "300ms" }}>
             <a href="#agendamento" className="group relative btn btn-primary !px-8 !py-3.5 !rounded-xl overflow-hidden">
               <span className="relative z-10 flex items-center gap-2">
@@ -206,7 +201,6 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Stats row */}
           <div className={`flex flex-wrap gap-6 transition-all duration-700 ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDelay: "450ms" }}>
             {STATS.map((s, i) => (
               <div key={i} className="flex items-center gap-3">
@@ -225,9 +219,12 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 z-20">
-        <svg viewBox="0 0 1440 112" fill="none" preserveAspectRatio="none" className="absolute bottom-0 w-full h-full"><path d="M0 112L1440 112V0L0 80Z" fill="white" /></svg>
+      {/* Scroll hint */}
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 transition-all duration-700 ${on ? "opacity-100" : "opacity-0"}`} style={{ transitionDelay: "1.5s" }}>
+        <span className="text-white/25 text-[0.6rem] font-bold tracking-[0.25em] uppercase">Scroll</span>
+        <div className="w-5 h-8 rounded-full border-2 border-white/15 flex items-start justify-center p-1">
+          <div className="w-1 h-2 bg-white/40 rounded-full" style={{ animation: "scrollDot 2s ease-in-out infinite" }} />
+        </div>
       </div>
 
       <style jsx>{`
@@ -239,7 +236,8 @@ export default function Hero() {
         @keyframes heroTagA { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
         @keyframes heroTagB { 0%,100% { transform:translateY(0); } 50% { transform:translateY(5px) translateX(3px); } }
         @keyframes heroTagC { 0%,100% { transform:translateX(-50%); } 50% { transform:translateX(-50%) translateY(7px); } }
+        @keyframes scrollDot { 0%,100% { transform:translateY(0); opacity:1; } 50% { transform:translateY(6px); opacity:0.3; } }
       `}</style>
-    </section>
+    </div>
   );
 }

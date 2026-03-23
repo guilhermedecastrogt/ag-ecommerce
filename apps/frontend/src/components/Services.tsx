@@ -24,45 +24,49 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="servicos" className="relative py-24 lg:py-32 bg-neutral-light overflow-hidden">
-      {/* Decorative shape */}
+    <div className="relative h-[100dvh] flex items-center bg-neutral-light overflow-hidden">
+      {/* Parallax BG layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-light via-white to-neutral-light" />
       <div className="geo-shape text-blue -top-32 -right-32 !w-[400px] !h-[400px]" />
+      <div className="absolute bottom-0 left-0 w-[35%] h-[50%] bg-blue/[0.02]" style={{ clipPath: "polygon(0 100%, 0 30%, 100% 100%)" }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Diagonal accent */}
+      <div className="absolute top-0 right-0 w-[30%] h-[4px] bg-gradient-to-r from-transparent via-red to-transparent" />
+
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-10 lg:mb-14 section-content">
           <span className="inline-block text-red text-xs font-bold tracking-[0.2em] uppercase mb-3">
             Nossos Serviços
           </span>
-          <h2 className="font-[var(--font-display)] text-blue text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em] leading-tight mb-4">
+          <h2 className="font-[var(--font-display)] text-blue text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em] leading-tight mb-3">
             Serviços Diesel para cada{" "}
             <span className="text-red">aplicação</span>
           </h2>
-          <p className="text-neutral-dark/60 text-lg max-w-2xl mx-auto">
-            Atendemos linhas leve e pesada com diagnóstico e manutenção
-            especializada.
+          <p className="text-neutral-dark/60 text-base lg:text-lg max-w-2xl mx-auto">
+            Atendemos linhas leve e pesada com diagnóstico e manutenção especializada.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal-stagger">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 section-content" style={{ transitionDelay: "200ms" }}>
           {SERVICES.map((s, i) => (
             <div
               key={i}
-              className="reveal group bg-white border border-neutral-border rounded-2xl p-6 card-hover cursor-pointer"
+              className="sc-item group bg-white border border-neutral-border rounded-2xl p-5 card-hover cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-xl bg-blue/5 flex items-center justify-center text-blue group-hover:bg-red group-hover:text-white transition-all duration-180 mb-5">
-                <s.icon className="w-7 h-7" />
+              <div className="w-12 h-12 rounded-xl bg-blue/5 flex items-center justify-center text-blue group-hover:bg-red group-hover:text-white transition-all duration-180 mb-4">
+                <s.icon className="w-6 h-6" />
               </div>
-              <h3 className="font-[var(--font-display)] text-blue text-lg font-bold tracking-wide uppercase mb-2">
+              <h3 className="font-[var(--font-display)] text-blue text-base font-bold tracking-wide uppercase mb-1.5">
                 {s.label}
               </h3>
-              <p className="text-neutral-dark/55 text-sm leading-relaxed mb-4">
+              <p className="text-neutral-dark/55 text-xs leading-relaxed mb-3">
                 {s.desc}
               </p>
-              <span className="inline-flex items-center gap-1 text-red text-xs font-bold tracking-wider uppercase group-hover:gap-2 transition-all duration-150">
+              <span className="inline-flex items-center gap-1 text-red text-[0.65rem] font-bold tracking-wider uppercase group-hover:gap-2 transition-all duration-150">
                 Agendar diagnóstico
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
@@ -70,6 +74,6 @@ export default function Services() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
