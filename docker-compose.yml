@@ -102,6 +102,25 @@ services:
     ports:
       - '4003:4003'
 
+  product-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-study-product-service
+    environment:
+      PORT: 4004
+      HOST: 0.0.0.0
+      DATABASE_URL: mysql://root:root@mysql:3306/study_ms
+      KAFKA_BROKER: kafka:9092
+    command: sh -c "npm run prisma:generate && npm run start:product"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    ports:
+      - '4004:4004'
+
   api-gateway:
     build:
       context: .
@@ -115,6 +134,8 @@ services:
       ORDERS_SERVICE_PORT: 4002
       AUTH_SERVICE_HOST: auth-service
       AUTH_SERVICE_PORT: 4003
+      PRODUCT_SERVICE_HOST: product-service
+      PRODUCT_SERVICE_PORT: 4004
     command: npm run start:gateway
     depends_on:
       users-service:
@@ -122,6 +143,8 @@ services:
       orders-service:
         condition: service_started
       auth-service:
+        condition: service_started
+      product-service:
         condition: service_started
     ports:
       - '3010:3000'

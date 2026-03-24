@@ -29,6 +29,14 @@ import { ApiGatewayController } from './api-gateway.controller';
           port: Number(process.env.AUTH_SERVICE_PORT ?? 4003),
         },
       },
+      {
+        name: 'PRODUCT_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.PRODUCT_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.PRODUCT_SERVICE_PORT ?? 4004),
+        },
+      },
     ]),
   ],
   controllers: [ApiGatewayController],

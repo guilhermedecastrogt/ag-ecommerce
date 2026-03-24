@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  Inject,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -33,6 +42,7 @@ export class ApiGatewayController {
     @Inject('USERS_SERVICE') private readonly usersClient: ClientProxy,
     @Inject('ORDERS_SERVICE') private readonly ordersClient: ClientProxy,
     @Inject('AUTH_SERVICE') private readonly authClient: ClientProxy,
+    @Inject('PRODUCT_SERVICE') private readonly productClient: ClientProxy,
   ) {}
 
   @Get()
@@ -99,5 +109,31 @@ export class ApiGatewayController {
   @Post('auth/logout')
   async logoutUser(@Body() payload: { refreshToken: string }) {
     return firstValueFrom(this.authClient.send('auth.logout', payload));
+  }
+
+  // --- Product Endpoints ---
+
+  @Get('products')
+  async findProducts() {
+    return firstValueFrom(this.productClient.send('products.findAll', {}));
+  }
+
+  @Get('products/:slug')
+  async findProductBySlug(@Param('slug') slug: string) {
+    try {
+      return await firstValueFrom(
+        this.productClient.send('products.findBySlug', { slug }),
+      );
+    } catch (error) {
+      throw new HttpException(
+        error?.message ?? 'Internal server error',
+        error?.statusCode ?? 500,
+      );
+    }
+  }
+
+  @Get('categories')
+  async findCategories() {
+    return firstValueFrom(this.productClient.send('categories.findAll', {}));
   }
 }
