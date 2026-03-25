@@ -2,6 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersController } from './orders/presentation/controllers/orders.controller';
 import { CreateOrderUseCase } from './orders/application/use-cases/create-order.use-case';
 import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-orders.use-case';
+import { FindOrdersByUserUseCase } from './orders/application/use-cases/find-orders-by-user.use-case';
+import { CancelOrderUseCase } from './orders/application/use-cases/cancel-order.use-case';
 import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-user.use-case';
 
 describe('OrdersServiceController', () => {
@@ -19,6 +21,18 @@ describe('OrdersServiceController', () => {
         },
         {
           provide: FindAllOrdersUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
+        {
+          provide: FindOrdersByUserUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
+        {
+          provide: CancelOrderUseCase,
           useValue: {
             execute: jest.fn(),
           },
