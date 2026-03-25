@@ -47,6 +47,27 @@ model KnownUser {
   createdAt DateTime
 }
 
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  price       Float
+  stock       Int      @default(0)
+  description String   @db.Text
+  imageUrl    String
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model AuthUser {
   id           Int      @id @default(autoincrement())
   email        String   @unique
