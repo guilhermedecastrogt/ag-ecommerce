@@ -1,8 +1,9 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import type { LoginUserDto } from './dtos/login-user.dto';
-import type { RegisterUserDto } from './dtos/register-user.dto';
+import { LoginUserDto } from './dtos/login-user.dto';
+import { RegisterUserDto } from './dtos/register-user.dto';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
 import type { TokenResponseDto } from './dtos/token-response.dto';
 
 @Controller('auth')
@@ -26,16 +27,14 @@ export class AuthController {
   }
 
   @Post('refresh')
-  async refresh(
-    @Body() payload: { refreshToken: string },
-  ): Promise<TokenResponseDto> {
+  async refresh(@Body() payload: RefreshTokenDto): Promise<TokenResponseDto> {
     return firstValueFrom(
       this.authClient.send<TokenResponseDto>('auth.refresh', payload),
     );
   }
 
   @Post('logout')
-  async logout(@Body() payload: { refreshToken: string }): Promise<void> {
+  async logout(@Body() payload: RefreshTokenDto): Promise<void> {
     return firstValueFrom(this.authClient.send<void>('auth.logout', payload));
   }
 }

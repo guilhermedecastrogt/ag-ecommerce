@@ -27,9 +27,17 @@ import { KafkaEventPublisher } from './infrastructure/events/kafka-event-publish
 
 @Module({
   imports: [
-    JwtModule.register({
+    JwtModule.registerAsync({
       global: true,
-      secret: process.env.JWT_SECRET || 'super-secret-key-for-dev',
+      useFactory: () => {
+        const secret = process.env.JWT_SECRET;
+        if (!secret) {
+          throw new Error(
+            'JWT_SECRET environment variable is not defined. Refusing to start.',
+          );
+        }
+        return { secret };
+      },
     }),
     ClientsModule.register([
       {
