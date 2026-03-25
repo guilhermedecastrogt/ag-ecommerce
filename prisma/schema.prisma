@@ -15,10 +15,29 @@ model User {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  total     Float
-  createdAt DateTime @default(now())
+  id          Int         @id @default(autoincrement())
+  userId      Int
+  status      String      @default("PENDING") // PENDING, PAID, CANCELLED
+  subTotal    Float
+  shippingFee Float       @default(0)
+  discount    Float       @default(0)
+  total       Float
+  addressSnapshot String? @db.Text
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  items       OrderItem[]
+}
+
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  order     Order  @relation(fields: [orderId], references: [id])
+  productId String
+  name      String
+  price     Float
+  quantity  Int
+
+  @@index([orderId])
 }
 
 model KnownUser {

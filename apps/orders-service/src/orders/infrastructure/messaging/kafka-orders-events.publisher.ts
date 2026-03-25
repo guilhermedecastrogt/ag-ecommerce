@@ -22,8 +22,30 @@ export class KafkaOrdersEventsPublisher
       this.kafkaClient.emit('orders.order-created.v1', {
         id: order.id,
         userId: order.userId,
+        status: order.status,
+        subTotal: order.subTotal,
+        shippingFee: order.shippingFee,
+        discount: order.discount,
         total: order.total,
+        items: order.items.map((item) => ({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
         createdAt: order.createdAt.toISOString(),
+      }),
+    );
+  }
+
+  async publishOrderCancelled(order: OrderEntity): Promise<void> {
+    await firstValueFrom(
+      this.kafkaClient.emit('orders.order-cancelled.v1', {
+        id: order.id,
+        userId: order.userId,
+        status: order.status,
+        total: order.total,
+        cancelledAt: order.updatedAt.toISOString(),
       }),
     );
   }
