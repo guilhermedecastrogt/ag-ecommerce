@@ -3,6 +3,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { OrdersPrismaService } from './orders-prisma.service';
 import { CreateOrderUseCase } from './orders/application/use-cases/create-order.use-case';
 import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-orders.use-case';
+import { FindOrdersByUserUseCase } from './orders/application/use-cases/find-orders-by-user.use-case';
+import { CancelOrderUseCase } from './orders/application/use-cases/cancel-order.use-case';
 import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-user.use-case';
 import { KafkaOrdersEventsPublisher } from './orders/infrastructure/messaging/kafka-orders-events.publisher';
 import { PrismaKnownUsersRepository } from './orders/infrastructure/persistence/prisma-known-users.repository';
@@ -35,6 +37,8 @@ import {
     OrdersPrismaService,
     CreateOrderUseCase,
     FindAllOrdersUseCase,
+    FindOrdersByUserUseCase,
+    CancelOrderUseCase,
     SyncKnownUserUseCase,
     PrismaOrdersRepository,
     PrismaKnownUsersRepository,
