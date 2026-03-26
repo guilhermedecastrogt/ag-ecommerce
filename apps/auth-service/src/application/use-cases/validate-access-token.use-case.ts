@@ -7,6 +7,7 @@ import {
   type IAuthUserRepository,
   I_AUTH_USER_REPOSITORY,
 } from '../../domain/repositories/auth-user.repository.interface';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
 
 @Injectable()
 export class ValidateAccessTokenUseCase {
@@ -16,7 +17,7 @@ export class ValidateAccessTokenUseCase {
     private readonly userRepository: IAuthUserRepository,
   ) {}
 
-  async execute(token: string): Promise<any> {
+  async execute(token: string): Promise<JwtPayload> {
     try {
       const payload = await this.jwtService.verifyAccessToken(token);
 
@@ -27,7 +28,7 @@ export class ValidateAccessTokenUseCase {
       }
 
       return payload;
-    } catch (e) {
+    } catch {
       throw new UnauthorizedException('Invalid access token');
     }
   }

@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import {
   type IRefreshSessionRepository,
   I_REFRESH_SESSION_REPOSITORY,
@@ -22,7 +22,7 @@ export class LogoutUseCase {
       if (payload && payload.jti) {
         await this.sessionRepository.revoke(payload.jti);
       }
-    } catch (e) {
+    } catch {
       // Ignore errors for invalid tokens during logout
     }
   }

@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { Logger } from 'nestjs-pino';
 import { ProductServiceModule } from './product-service.module';
 
 async function bootstrap() {
@@ -23,6 +24,9 @@ async function bootstrap() {
     },
   });
 
+  app.useLogger(app.get(Logger));
+
   await app.startAllMicroservices();
+  await app.listen(Number(process.env.HEALTH_PORT ?? 4014), '0.0.0.0');
 }
 void bootstrap();
