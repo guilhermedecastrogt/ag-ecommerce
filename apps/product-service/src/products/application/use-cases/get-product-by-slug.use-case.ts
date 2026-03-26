@@ -15,7 +15,10 @@ export class GetProductBySlugUseCase {
     const product = await this.productsRepository.findBySlug(slug);
 
     if (!product) {
-      throw new RpcException({ statusCode: 404, message: 'Produto não encontrado' });
+      throw new RpcException({
+        statusCode: 404,
+        message: 'Produto não encontrado',
+      });
     }
 
     return product;

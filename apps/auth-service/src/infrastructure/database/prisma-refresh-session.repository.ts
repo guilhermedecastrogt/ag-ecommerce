@@ -47,7 +47,14 @@ export class PrismaRefreshSessionRepository implements IRefreshSessionRepository
     });
   }
 
-  private mapToDomain(prismaSession: any): RefreshSession {
+  private mapToDomain(prismaSession: {
+    id: number;
+    jti: string;
+    userId: number;
+    expiresAt: Date;
+    revokedAt: Date | null;
+    createdAt: Date;
+  }): RefreshSession {
     return new RefreshSession(
       prismaSession.id,
       prismaSession.jti,
