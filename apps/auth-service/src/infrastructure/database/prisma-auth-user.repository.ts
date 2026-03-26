@@ -48,7 +48,14 @@ export class PrismaAuthUserRepository implements IAuthUserRepository {
     return this.mapToDomain(user);
   }
 
-  private mapToDomain(prismaUser: any): AuthUser {
+  private mapToDomain(prismaUser: {
+    id: number;
+    email: string;
+    passwordHash: string;
+    status: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }): AuthUser {
     return new AuthUser(
       prismaUser.id,
       prismaUser.email,
