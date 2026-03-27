@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
-      <body className="h-full overflow-hidden">{children}</body>
+      <body className="h-full overflow-auto md:overflow-hidden">{children}</body>
     </html>
   );
 }

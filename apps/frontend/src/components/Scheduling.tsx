@@ -7,34 +7,35 @@ export default function Scheduling() {
   const [hasCadastro, setHasCadastro] = useState(false);
 
   return (
-    <div className="relative h-[100dvh] flex items-center bg-blue overflow-hidden">
-      {/* Decorative layers */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-white" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 0)" }} />
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-red" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }} />
+    <div className="relative min-h-auto md:h-[100dvh] flex items-center bg-blue overflow-hidden">
+      {/* Decorative layers — simplified on mobile */}
+      <div className="hidden md:block absolute top-0 left-0 right-0 h-16 bg-white" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 0)" }} />
+      <div className="hidden md:block absolute bottom-0 left-0 right-0 h-16 bg-red" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }} />
       <div className="geo-shape text-white -right-32 top-20 !w-[400px] !h-[400px]" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Left: info */}
-          <div className="sc-left">
-            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 mb-5">
+          {/* Left: info — compact on mobile */}
+          <div className="sc-left text-center md:text-left">
+            <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 mb-4 md:mb-5">
               <IconCalendar className="w-4 h-4 text-red" />
               <span className="text-white text-xs font-bold tracking-widest uppercase">
                 Agendamento
               </span>
             </div>
 
-            <h2 className="font-[var(--font-display)] text-white text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em] leading-tight mb-4">
+            <h2 className="font-[var(--font-display)] text-white text-2xl md:text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em] leading-tight mb-3 md:mb-4">
               Agende seu{" "}
               <span className="text-red">serviço</span>
             </h2>
 
-            <p className="text-white/65 text-base lg:text-lg leading-relaxed mb-8 max-w-lg">
+            <p className="text-white/65 text-sm md:text-base lg:text-lg leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto md:mx-0">
               Agende diagnósticos, reparos ou manutenção em veículos diesel.
               Nossa equipe retorna o contato para confirmar data e horário.
             </p>
 
-            <div className="space-y-4">
+            {/* Phone + hours — hidden on mobile, shown inline with form on desktop */}
+            <div className="hidden md:block space-y-4">
               <div className="flex items-center gap-4">
                 <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center text-red">
                   <IconPhone className="w-5 h-5" />
@@ -65,20 +66,20 @@ export default function Scheduling() {
             </div>
           </div>
 
-          {/* Right: form — compact for viewport fit */}
+          {/* Right: form — single column on mobile */}
           <div className="sc-right">
             <form
-              className="bg-white rounded-2xl p-6 lg:p-7 shadow-2xl shadow-black/20"
+              className="bg-white rounded-xl md:rounded-2xl p-5 md:p-6 lg:p-7 shadow-2xl shadow-black/20"
               onSubmit={(e) => e.preventDefault()}
             >
-              <h3 className="font-[var(--font-display)] text-blue text-lg font-bold tracking-wider uppercase mb-4">
+              <h3 className="font-[var(--font-display)] text-blue text-base md:text-lg font-bold tracking-wider uppercase mb-3 md:mb-4">
                 Solicitar Agendamento
               </h3>
 
               <div className="space-y-3">
                 {/* Cadastro toggle */}
                 <div className="flex items-center justify-between bg-neutral-light rounded-xl p-3">
-                  <span className="text-sm font-medium text-neutral-dark/70">
+                  <span className="text-xs md:text-sm font-medium text-neutral-dark/70">
                     Já possui cadastro?
                   </span>
                   <div className="flex items-center gap-2">
@@ -88,7 +89,8 @@ export default function Scheduling() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                {/* Single column on mobile, 2 cols on md+ */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                     <label className="text-[0.65rem] font-bold text-neutral-dark/50 tracking-wider uppercase block mb-1">Nome completo</label>
                     <input type="text" placeholder="Seu nome" className="w-full border border-neutral-border rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-red/30 focus:border-red transition-all" />
@@ -99,7 +101,7 @@ export default function Scheduling() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                     <label className="text-[0.65rem] font-bold text-neutral-dark/50 tracking-wider uppercase block mb-1">Tipo de veículo</label>
                     <select className="w-full border border-neutral-border rounded-xl px-3 py-2.5 text-sm text-neutral-dark/70 focus:outline-none focus:ring-2 focus:ring-red/30 focus:border-red transition-all bg-white">
@@ -130,6 +132,20 @@ export default function Scheduling() {
                 </button>
               </div>
             </form>
+          </div>
+
+          {/* Mobile-only: phone + hours compact row */}
+          <div className="md:hidden flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-4">
+            <div>
+              <span className="text-white/50 text-[0.6rem] tracking-wider uppercase block">Telefone</span>
+              <a href="tel:+556240086363" className="text-white font-bold text-sm hover:text-red transition-colors">
+                (62) 4008-6363
+              </a>
+            </div>
+            <div className="text-right">
+              <span className="text-white/50 text-[0.6rem] tracking-wider uppercase block">Seg-Sex</span>
+              <span className="text-white font-semibold text-sm">08h–18h</span>
+            </div>
           </div>
         </div>
       </div>

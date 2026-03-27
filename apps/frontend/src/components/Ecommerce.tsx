@@ -46,7 +46,7 @@ function ProductCard({ p, idx }: { p: typeof PRODUCTS[0]; idx: number }) {
         </div>
       )}
 
-      <div className="relative h-36 bg-gradient-to-br from-neutral-light to-[#e8ecf1] overflow-hidden">
+      <div className="relative h-28 md:h-36 bg-gradient-to-br from-neutral-light to-[#e8ecf1] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className={`transition-transform duration-500 ${hovered ? "scale-110" : "scale-100"}`}>
             <div className="w-20 h-20 rounded-xl bg-blue/[0.07] flex items-center justify-center rotate-12">
@@ -129,31 +129,31 @@ export default function Ecommerce() {
   };
 
   return (
-    <div className="relative h-[100dvh] flex items-center bg-white overflow-hidden">
-      {/* BG accents */}
-      <div className="absolute top-0 right-0 w-[45%] h-full bg-blue/[0.02] -skew-x-6 origin-top-right pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[30%] h-[60%] bg-red/[0.015] skew-x-3 origin-bottom-left pointer-events-none" />
+    <div className="relative min-h-auto md:h-[100dvh] flex items-center bg-white overflow-hidden">
+      {/* BG accents — hidden on mobile */}
+      <div className="hidden md:block absolute top-0 right-0 w-[45%] h-full bg-blue/[0.02] -skew-x-6 origin-top-right pointer-events-none" />
+      <div className="hidden md:block absolute bottom-0 left-0 w-[30%] h-[60%] bg-red/[0.015] skew-x-3 origin-bottom-left pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 w-full">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 w-full py-12 md:py-0">
 
         {/* Header row */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6 section-content">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5 md:mb-6 section-content">
           <div>
             <div className="inline-flex items-center gap-2 bg-red/5 rounded-full px-4 py-1.5 mb-3">
               <IconShoppingCart className="w-4 h-4 text-red" />
               <span className="text-red text-[0.65rem] font-bold tracking-[0.2em] uppercase">Loja Online</span>
             </div>
-            <h2 className="font-[var(--font-display)] text-blue text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-[0.02em] leading-[0.95] mb-2">
+            <h2 className="font-[var(--font-display)] text-blue text-xl md:text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-[0.02em] leading-[0.95] mb-2">
               Peças e módulos diesel{" "}
               <span className="text-red">em destaque</span>
             </h2>
-            <p className="text-neutral-dark/50 text-sm lg:text-base max-w-lg">
+            <p className="text-neutral-dark/50 text-xs md:text-sm lg:text-base max-w-lg">
               Compre com a confiança de mais de 50 anos. Entrega para todo o Brasil.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <a href="tel:+556240086363" className="flex items-center gap-2 bg-blue/5 rounded-xl px-3 py-2 text-blue text-xs font-semibold hover:bg-blue/10 transition-colors">
+            <a href="tel:+556240086363" className="hidden md:flex items-center gap-2 bg-blue/5 rounded-xl px-3 py-2 text-blue text-xs font-semibold hover:bg-blue/10 transition-colors">
               <IconPhone className="w-3.5 h-3.5" />
               (62) 4008-6363
             </a>
@@ -164,13 +164,13 @@ export default function Ecommerce() {
           </div>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex flex-wrap gap-2 mb-5 section-content" style={{ transitionDelay: "100ms" }}>
+        {/* Category tabs — horizontal scroll on mobile */}
+        <div className="flex gap-2 mb-5 section-content overflow-x-auto pb-1 -mb-1 md:flex-wrap md:overflow-visible md:pb-0 md:mb-5" style={{ transitionDelay: "100ms", scrollbarWidth: "none", msOverflowStyle: "none" }}>
           {CATEGORIES.map((c) => (
             <button
               key={c.id}
               onClick={() => setActive(c.id)}
-              className={`px-3 py-1.5 rounded-lg text-[0.65rem] font-bold tracking-wider uppercase transition-all duration-200 ${
+              className={`px-3 py-1.5 rounded-lg text-[0.65rem] font-bold tracking-wider uppercase transition-all duration-200 shrink-0 ${
                 active === c.id
                   ? "bg-blue text-white shadow-lg shadow-blue/20"
                   : "bg-neutral-light text-blue/50 hover:bg-blue/5 hover:text-blue"
@@ -194,16 +194,16 @@ export default function Ecommerce() {
             </button>
           )}
 
-          {canScrollLeft && <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />}
-          {canScrollRight && <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />}
+          {canScrollLeft && <div className="hidden md:block absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />}
+          {canScrollRight && <div className="hidden md:block absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />}
 
           <div
             ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth pb-3 -mb-3 snap-x snap-mandatory scrollbar-none"
+            className="flex gap-3 md:gap-4 overflow-x-auto scroll-smooth pb-3 -mb-3 snap-x snap-mandatory scrollbar-none"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {filtered.map((p, i) => (
-              <div key={p.id} className="w-[240px] shrink-0 snap-start">
+              <div key={p.id} className="w-[175px] md:w-[240px] shrink-0 snap-start">
                 <ProductCard p={p} idx={i} />
               </div>
             ))}
@@ -212,7 +212,7 @@ export default function Ecommerce() {
               href="https://loja.aguiadiesel.com.br/loja/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-[240px] shrink-0 snap-start flex flex-col items-center justify-center bg-gradient-to-br from-blue/[0.03] to-blue/[0.08] border-2 border-dashed border-blue/10 rounded-2xl p-6 hover:border-red/30 hover:from-red/[0.02] hover:to-red/[0.05] transition-all duration-300 group min-h-[320px]"
+              className="w-[175px] md:w-[240px] shrink-0 snap-start flex flex-col items-center justify-center bg-gradient-to-br from-blue/[0.03] to-blue/[0.08] border-2 border-dashed border-blue/10 rounded-2xl p-6 hover:border-red/30 hover:from-red/[0.02] hover:to-red/[0.05] transition-all duration-300 group min-h-[260px] md:min-h-[320px]"
             >
               <div className="w-14 h-14 rounded-xl bg-blue/[0.06] flex items-center justify-center mb-4 group-hover:bg-red/10 transition-colors">
                 <svg className="w-6 h-6 text-blue/30 group-hover:text-red transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -224,8 +224,8 @@ export default function Ecommerce() {
           </div>
         </div>
 
-        {/* Brands bar */}
-        <div className="mt-8 section-content" style={{ transitionDelay: "300ms" }}>
+        {/* Brands bar — hidden on mobile to keep it clean */}
+        <div className="hidden md:block mt-8 section-content" style={{ transitionDelay: "300ms" }}>
           <div className="flex items-center gap-3 mb-3">
             <IconSearch className="w-3.5 h-3.5 text-blue/30" />
             <span className="font-[var(--font-display)] text-blue/40 text-[0.65rem] font-bold tracking-[0.2em] uppercase">
