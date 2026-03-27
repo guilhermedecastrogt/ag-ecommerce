@@ -31,36 +31,37 @@ export default function Footer() {
 
   return (
     <>
-      <div className="relative h-[100dvh] flex items-end bg-blue overflow-hidden">
-        <div className="w-full py-16">
+      <div className="relative min-h-auto md:h-[100dvh] flex items-end bg-blue overflow-hidden">
+        <div className="w-full py-10 md:py-16">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Top: logo + links */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 section-content">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-10 section-content">
               {/* Brand */}
-              <div className="sm:col-span-2 lg:col-span-1">
-                <div className="mb-4">
+              <div className="col-span-2 lg:col-span-1">
+                <div className="mb-3 md:mb-4">
                   <Image
                     src="/logo-aguia.png"
                     alt="Águia Diesel"
-                    width={150}
-                    height={54}
+                    width={120}
+                    height={43}
+                    className="md:w-[150px]"
                   />
                 </div>
-                <p className="text-white/45 text-sm leading-relaxed max-w-xs">
+                <p className="text-white/45 text-xs md:text-sm leading-relaxed max-w-xs">
                   Diagnóstico e excelência em diesel, do laboratório à estrada.
                   Mais de 50 anos de experiência.
                 </p>
               </div>
 
-              {/* Links */}
+              {/* Links — 2 columns on mobile */}
               <div>
-                <h4 className="font-[var(--font-display)] text-white/70 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+                <h4 className="font-[var(--font-display)] text-white/70 text-[0.6rem] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 md:mb-4">
                   Navegação
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5 md:space-y-2">
                   {FOOTER_LINKS.slice(0, 4).map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-white/50 text-sm hover:text-white transition-colors">
+                      <a href={link.href} className="text-white/50 text-xs md:text-sm hover:text-white transition-colors">
                         {link.label}
                       </a>
                     </li>
@@ -69,13 +70,13 @@ export default function Footer() {
               </div>
 
               <div>
-                <h4 className="font-[var(--font-display)] text-white/70 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+                <h4 className="font-[var(--font-display)] text-white/70 text-[0.6rem] md:text-xs font-bold tracking-[0.2em] uppercase mb-3 md:mb-4">
                   Atendimento
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5 md:space-y-2">
                   {FOOTER_LINKS.slice(4).map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-white/50 text-sm hover:text-white transition-colors">
+                      <a href={link.href} className="text-white/50 text-xs md:text-sm hover:text-white transition-colors">
                         {link.label}
                       </a>
                     </li>
@@ -83,7 +84,8 @@ export default function Footer() {
                 </ul>
               </div>
 
-              <div>
+              {/* Quick contact — hidden on mobile (already shown in Contact section) */}
+              <div className="hidden lg:block">
                 <h4 className="font-[var(--font-display)] text-white/70 text-xs font-bold tracking-[0.2em] uppercase mb-4">
                   Contato rápido
                 </h4>
@@ -104,11 +106,11 @@ export default function Footer() {
             </div>
 
             {/* Divider + copyright */}
-            <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 section-content" style={{ transitionDelay: "200ms" }}>
-              <p className="text-white/30 text-xs tracking-wider">
+            <div className="border-t border-white/10 pt-4 md:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4 section-content" style={{ transitionDelay: "200ms" }}>
+              <p className="text-white/30 text-[0.6rem] md:text-xs tracking-wider text-center sm:text-left">
                 &copy; Águia Diesel — 2026. Todos os direitos reservados.
               </p>
-              <div className="flex gap-3">
+              <div className="hidden md:flex gap-3">
                 <span className="text-white/20 text-xs tracking-wider">
                   Infraestrutura de laboratório para testes e aferição
                 </span>
