@@ -37,6 +37,9 @@
     "start:product": "nest start product-service",
     "start:product:dev": "nest start product-service --watch",
     "start:product:prod": "node dist/apps/product-service/main.js",
+    "start:shipping": "nest start shipping-service",
+    "start:shipping:dev": "nest start shipping-service --watch",
+    "start:shipping:prod": "node dist/apps/shipping-service/main.js",
     "start:frontend": "npm --prefix apps/frontend run dev",
     "build:frontend": "npm --prefix apps/frontend run build",
     "lint:frontend": "npm --prefix apps/frontend run lint"
