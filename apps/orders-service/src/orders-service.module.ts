@@ -11,6 +11,7 @@ import { FindAllOrdersUseCase } from './orders/application/use-cases/find-all-or
 import { FindOrdersByUserUseCase } from './orders/application/use-cases/find-orders-by-user.use-case';
 import { CancelOrderUseCase } from './orders/application/use-cases/cancel-order.use-case';
 import { SyncKnownUserUseCase } from './orders/application/use-cases/sync-known-user.use-case';
+import { UpdateOrderStatusUseCase } from './orders/application/use-cases/update-order-status.use-case';
 import { KafkaOrdersEventsPublisher } from './orders/infrastructure/messaging/kafka-orders-events.publisher';
 import { PrismaKnownUsersRepository } from './orders/infrastructure/persistence/prisma-known-users.repository';
 import { PrismaOrdersRepository } from './orders/infrastructure/persistence/prisma-orders.repository';
@@ -58,6 +59,7 @@ import {
     FindOrdersByUserUseCase,
     CancelOrderUseCase,
     SyncKnownUserUseCase,
+    UpdateOrderStatusUseCase,
     PrismaOrdersRepository,
     PrismaKnownUsersRepository,
     KafkaOrdersEventsPublisher,

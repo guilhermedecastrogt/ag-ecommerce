@@ -3,6 +3,9 @@ import {
   Controller,
   Get,
   Inject,
+  Param,
+  ParseIntPipe,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -11,6 +14,8 @@ import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { ClsService } from 'nestjs-cls';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 import { sendWithContext } from '../common/helpers/send-with-context';
 import { withResilience } from '../common/helpers/resilience';
 import type { CheckoutDto } from './dtos/checkout.dto';
@@ -22,6 +27,8 @@ export class OrdersController {
     @Inject('ORDERS_SERVICE') private readonly ordersClient: ClientProxy,
     private readonly cls: ClsService,
   ) {}
+
+  // ─── User ─────────────────────────────────────────────────────────────────
 
   @UseGuards(JwtAuthGuard)
   @Post('checkout')
@@ -84,7 +91,10 @@ export class OrdersController {
     );
   }
 
-  @UseGuards(JwtAuthGuard)
+  // ─── Admin ────────────────────────────────────────────────────────────────
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
   @Get()
   async findAll(): Promise<OrderDto[]> {
     return firstValueFrom(
@@ -95,6 +105,26 @@ export class OrdersController {
           {},
           this.cls,
         ),
+      ),
+    );
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  @Patch(':id/status')
+  async updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: { status: string },
+  ): Promise<OrderDto> {
+    return firstValueFrom(
+      withResilience(
+        sendWithContext<OrderDto>(
+          this.ordersClient,
+          'orders.updateStatus',
+          { orderId: id, status: body.status },
+          this.cls,
+        ),
+        { timeoutMs: 8000, retries: 1 },
       ),
     );
   }
