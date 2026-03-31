@@ -88,3 +88,12 @@ model RefreshSession {
   revokedAt DateTime?
   createdAt DateTime @default(now())
 }
+
+model MelhorEnvioToken {
+  id           Int      @id @default(autoincrement())
+  accessToken  String   @db.Text
+  refreshToken String   @db.Text
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
