@@ -6,6 +6,7 @@ import { FindAllOrdersUseCase } from '../../application/use-cases/find-all-order
 import { FindOrdersByUserUseCase } from '../../application/use-cases/find-orders-by-user.use-case';
 import { CancelOrderUseCase } from '../../application/use-cases/cancel-order.use-case';
 import { SyncKnownUserUseCase } from '../../application/use-cases/sync-known-user.use-case';
+import { UpdateOrderStatusUseCase } from '../../application/use-cases/update-order-status.use-case';
 
 @Controller()
 export class OrdersController {
@@ -15,6 +16,7 @@ export class OrdersController {
     private readonly findOrdersByUserUseCase: FindOrdersByUserUseCase,
     private readonly cancelOrderUseCase: CancelOrderUseCase,
     private readonly syncKnownUserUseCase: SyncKnownUserUseCase,
+    private readonly updateOrderStatusUseCase: UpdateOrderStatusUseCase,
   ) {}
 
   @MessagePattern('orders.checkout')
@@ -35,6 +37,11 @@ export class OrdersController {
   @MessagePattern('orders.cancel')
   cancel(@Payload() payload: { orderId: number; userId: number }) {
     return this.cancelOrderUseCase.execute(payload);
+  }
+
+  @MessagePattern('orders.updateStatus')
+  updateStatus(@Payload() payload: { orderId: number; status: string }) {
+    return this.updateOrderStatusUseCase.execute(payload);
   }
 
   @EventPattern('users.user-created.v1')
