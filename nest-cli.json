@@ -55,6 +55,15 @@
         "tsConfigPath": "apps/product-service/tsconfig.app.json"
       }
     },
+    "shipping-service": {
+      "type": "application",
+      "root": "apps/shipping-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/shipping-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/shipping-service/tsconfig.app.json"
+      }
+    },
     "users-service": {
       "type": "application",
       "root": "apps/users-service",

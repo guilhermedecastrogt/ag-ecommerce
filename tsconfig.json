@@ -23,5 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {}
   },
-  "exclude": ["apps/frontend/**/*"]
+  "exclude": [
+    "apps/frontend/**/*"
+  ]
 }
