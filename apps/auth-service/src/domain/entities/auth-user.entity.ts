@@ -6,5 +6,6 @@ export class AuthUser {
     public readonly status: string,
     public readonly createdAt: Date,
     public readonly updatedAt: Date,
+    public readonly role: string = 'USER',
   ) {}
 }

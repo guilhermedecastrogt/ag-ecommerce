@@ -31,6 +31,7 @@ export class PrismaAuthUserRepository implements IAuthUserRepository {
         email: data.email,
         passwordHash: data.passwordHash,
         status: data.status,
+        role: data.role ?? 'USER',
       },
     });
     return this.mapToDomain(user);
@@ -43,6 +44,7 @@ export class PrismaAuthUserRepository implements IAuthUserRepository {
         email: data.email,
         passwordHash: data.passwordHash,
         status: data.status,
+        role: data.role,
       },
     });
     return this.mapToDomain(user);
@@ -53,6 +55,7 @@ export class PrismaAuthUserRepository implements IAuthUserRepository {
     email: string;
     passwordHash: string;
     status: string;
+    role: string;
     createdAt: Date;
     updatedAt: Date;
   }): AuthUser {
@@ -63,6 +66,7 @@ export class PrismaAuthUserRepository implements IAuthUserRepository {
       prismaUser.status,
       prismaUser.createdAt,
       prismaUser.updatedAt,
+      prismaUser.role,
     );
   }
 }

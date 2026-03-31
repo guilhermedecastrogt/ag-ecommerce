@@ -53,7 +53,7 @@ export class LoginUserUseCase {
       throw new UnauthorizedException('User is not active');
     }
 
-    const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user.id, email: user.email, role: user.role };
     const accessToken = await this.jwtService.signAccessToken(payload);
 
     const jti = randomUUID();
