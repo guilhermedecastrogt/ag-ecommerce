@@ -52,9 +52,10 @@ export default function Header({ activeIndex, onNavigate }: HeaderProps) {
             <Image
               src="/logo-aguia.png"
               alt="Águia Diesel"
-              width={scrolled ? 120 : 140}
-              height={scrolled ? 43 : 50}
-              className="transition-all duration-300"
+              width={scrolled ? 100 : 110}
+              height={scrolled ? 36 : 39}
+              className="transition-all duration-300 md:w-auto"
+              style={{ width: scrolled ? 100 : 110, height: "auto" }}
               priority
             />
           </button>

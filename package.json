@@ -42,7 +42,9 @@
     "start:shipping:prod": "node dist/apps/shipping-service/main.js",
     "start:frontend": "npm --prefix apps/frontend run dev",
     "build:frontend": "npm --prefix apps/frontend run build",
-    "lint:frontend": "npm --prefix apps/frontend run lint"
+    "lint:frontend": "npm --prefix apps/frontend run lint",
+    "start:admin": "npm --prefix apps/frontend-admin run dev",
+    "build:admin": "npm --prefix apps/frontend-admin run build"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

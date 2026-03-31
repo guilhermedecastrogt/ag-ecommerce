@@ -9,8 +9,20 @@ async function bootstrap() {
 
   app.use(helmet());
 
+  const allowedOrigins = (
+    process.env.FRONTEND_URL ?? 'http://localhost:3000,http://localhost:3001'
+  )
+    .split(',')
+    .map((s) => s.trim());
+
   app.enableCors({
-    origin: process.env.FRONTEND_URL ?? 'http://localhost:3001',
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

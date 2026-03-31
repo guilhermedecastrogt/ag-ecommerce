@@ -13,3 +13,4 @@ pnpm-debug.log*
 .idea/
 .vscode/
 prisma/dev.db
+.claude

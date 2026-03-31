@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
 
 const barlow = Barlow({
   variable: "--font-barlow",
@@ -40,7 +42,11 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
-      <body className="h-full overflow-hidden">{children}</body>
+      <body className="h-full">
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -9,6 +9,12 @@ import { HealthModule } from './health/health.module';
 import { GetProductBySlugUseCase } from './products/application/use-cases/get-product-by-slug.use-case';
 import { ListCategoriesUseCase } from './products/application/use-cases/list-categories.use-case';
 import { ListProductsUseCase } from './products/application/use-cases/list-products.use-case';
+import { CreateProductUseCase } from './products/application/use-cases/create-product.use-case';
+import { UpdateProductUseCase } from './products/application/use-cases/update-product.use-case';
+import { DeleteProductUseCase } from './products/application/use-cases/delete-product.use-case';
+import { CreateCategoryUseCase } from './products/application/use-cases/create-category.use-case';
+import { UpdateCategoryUseCase } from './products/application/use-cases/update-category.use-case';
+import { DeleteCategoryUseCase } from './products/application/use-cases/delete-category.use-case';
 import { KafkaProductsEventsPublisher } from './products/infrastructure/messaging/kafka-products-events.publisher';
 import { PrismaCategoriesRepository } from './products/infrastructure/persistence/prisma-categories.repository';
 import { PrismaProductsRepository } from './products/infrastructure/persistence/prisma-products.repository';
@@ -54,6 +60,12 @@ import {
     ListProductsUseCase,
     GetProductBySlugUseCase,
     ListCategoriesUseCase,
+    CreateProductUseCase,
+    UpdateProductUseCase,
+    DeleteProductUseCase,
+    CreateCategoryUseCase,
+    UpdateCategoryUseCase,
+    DeleteCategoryUseCase,
     PrismaProductsRepository,
     PrismaCategoriesRepository,
     KafkaProductsEventsPublisher,

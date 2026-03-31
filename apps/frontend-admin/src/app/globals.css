@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #001429;
+  --color-blue: #003966;
+  --color-red: #DF040B;
+  --color-neutral-light: #F3F5F7;
+  --color-neutral-border: #E5E8EC;
+  --font-display: "Barlow Condensed", "Barlow", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

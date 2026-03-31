@@ -15,36 +15,36 @@ const BRANDS = [
 
 export default function Brands() {
   return (
-    <div className="relative h-[100dvh] flex items-center bg-neutral-light overflow-hidden">
+    <div className="relative min-h-auto md:h-[100dvh] flex items-center bg-neutral-light overflow-hidden">
       {/* BG accents */}
       <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-red/30 to-transparent" />
-      <div className="absolute -bottom-20 -right-20 w-[300px] h-[300px] opacity-[0.04] pointer-events-none">
+      <div className="hidden md:block absolute -bottom-20 -right-20 w-[300px] h-[300px] opacity-[0.04] pointer-events-none">
         <div className="absolute inset-0 rounded-[3rem] bg-blue rotate-45" />
         <div className="absolute inset-0 rounded-[3rem] bg-blue -rotate-45" />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center mb-14 section-content">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-0">
+        <div className="text-center mb-8 md:mb-14 section-content">
           <span className="inline-block text-red text-xs font-bold tracking-[0.2em] uppercase mb-3">
             Parceiros
           </span>
-          <h2 className="font-[var(--font-display)] text-blue text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em]">
+          <h2 className="font-[var(--font-display)] text-blue text-2xl md:text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em]">
             Concessionário das marcas
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-5 section-content" style={{ transitionDelay: "200ms" }}>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-5 section-content" style={{ transitionDelay: "200ms" }}>
           {BRANDS.map((brand) => (
             <div
               key={brand.name}
-              className="sc-item group bg-white border border-neutral-border rounded-2xl p-6 flex items-center justify-center h-28 card-hover"
+              className="sc-item group bg-white border border-neutral-border rounded-xl md:rounded-2xl p-4 md:p-6 flex items-center justify-center h-20 md:h-28 card-hover"
             >
               <Image
                 src={brand.logo}
                 alt={brand.name}
                 width={120}
                 height={40}
-                className="object-contain max-h-[36px] opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                className="object-contain max-h-[28px] md:max-h-[36px] opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
               />
             </div>
           ))}
