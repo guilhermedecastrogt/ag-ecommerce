@@ -13,6 +13,14 @@ import { ProductsController } from './products.controller';
           port: Number(process.env.PRODUCT_SERVICE_PORT ?? 4004),
         },
       },
+      {
+        name: 'AUTH_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.AUTH_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.AUTH_SERVICE_PORT ?? 4003),
+        },
+      },
     ]),
   ],
   controllers: [ProductsController],

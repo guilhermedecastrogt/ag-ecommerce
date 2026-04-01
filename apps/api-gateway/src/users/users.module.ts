@@ -13,6 +13,14 @@ import { UsersController } from './users.controller';
           port: Number(process.env.USERS_SERVICE_PORT ?? 4001),
         },
       },
+      {
+        name: 'AUTH_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.AUTH_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.AUTH_SERVICE_PORT ?? 4003),
+        },
+      },
     ]),
   ],
   controllers: [UsersController],

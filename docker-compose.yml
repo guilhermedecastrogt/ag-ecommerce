@@ -72,7 +72,7 @@ services:
       - '4001:4001'
       - '4011:4011'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:4011/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4011/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -102,7 +102,7 @@ services:
       - '4002:4002'
       - '4012:4012'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:4012/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4012/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -132,7 +132,7 @@ services:
       - '4003:4003'
       - '4013:4013'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:4013/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4013/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -161,7 +161,7 @@ services:
       - '4004:4004'
       - '4014:4014'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:4014/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4014/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -195,7 +195,7 @@ services:
       - '4005:4005'
       - '4015:4015'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:4015/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:4015/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -238,7 +238,7 @@ services:
     ports:
       - '3010:3000'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:3000/health']
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 10
