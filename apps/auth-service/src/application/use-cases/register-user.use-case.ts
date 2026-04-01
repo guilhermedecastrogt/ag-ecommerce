@@ -34,6 +34,7 @@ export class RegisterUserUseCase {
       email: dto.email,
       passwordHash,
       status: 'ACTIVE',
+      role: 'USER',
     });
 
     this.eventPublisher.publish('auth.user-registered.v1', {
