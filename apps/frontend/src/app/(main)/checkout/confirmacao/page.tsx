@@ -2,8 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function ConfirmacaoPage() {
+function ConfirmacaoContent() {
   const params = useSearchParams();
   const orderId = params.get("orderId");
 
@@ -76,5 +77,13 @@ export default function ConfirmacaoPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ConfirmacaoPage() {
+  return (
+    <Suspense>
+      <ConfirmacaoContent />
+    </Suspense>
   );
 }
