@@ -1,6 +1,58 @@
 import { Injectable, UnauthorizedException, InternalServerErrorException } from '@nestjs/common';
 import { ShippingPrismaService } from '../shipping-prisma.service';
 
+export interface CartItemPayload {
+  service: number;
+  from: {
+    name: string;
+    phone: string;
+    email: string;
+    document: string;
+    address: string;
+    complement?: string;
+    number: string;
+    district: string;
+    city: string;
+    country_id: string;
+    postal_code: string;
+    state_abbr: string;
+  };
+  to: {
+    name: string;
+    phone: string;
+    email: string;
+    document: string;
+    address: string;
+    complement?: string;
+    number: string;
+    district: string;
+    city: string;
+    country_id: string;
+    postal_code: string;
+    state_abbr: string;
+  };
+  products: {
+    name: string;
+    quantity: number;
+    unitary_value: number;
+    weight: number;
+  }[];
+  volumes: {
+    height: number;
+    width: number;
+    length: number;
+    weight: number;
+  }[];
+  options: {
+    insurance_value: number;
+    receipt: boolean;
+    own_hand: boolean;
+    reverse: boolean;
+    non_commercial: boolean;
+    tags: { tag: string; url: null }[];
+  };
+}
+
 @Injectable()
 export class MelhorEnvioClient {
   private readonly baseUrl = process.env.MELHOR_ENVIO_API_URL || 'https://sandbox.melhorenvio.com.br';
@@ -13,30 +65,50 @@ export class MelhorEnvioClient {
     if (!tokenRecord) {
       throw new UnauthorizedException('App not authorized with Melhor Envio yet. Please visit /shipping/auth.');
     }
-    
-    // Simplification: In a robust app, we should check `expiresAt` and trigger refreshToken here if expired.
     return tokenRecord.accessToken;
   }
 
-  async calculateFreight(payload: any): Promise<any> {
+  private async request<T>(path: string, options: RequestInit): Promise<T> {
     const token = await this.getToken();
-    
-    const response = await fetch(`${this.baseUrl}/api/v2/me/shipment/calculate`, {
-      method: 'POST',
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      ...options,
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
         'User-Agent': this.userAgent,
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        ...(options.headers ?? {}),
       },
-      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
       const err = await response.text();
-      throw new InternalServerErrorException(`Error calculating freight: ${err}`);
+      throw new InternalServerErrorException(`Melhor Envio error [${path}]: ${err}`);
     }
 
-    return response.json();
+    return response.json() as Promise<T>;
+  }
+
+  async calculateFreight(payload: any): Promise<any> {
+    return this.request('/api/v2/me/shipment/calculate', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  }
+
+  /** Insere envio no carrinho virtual do Melhor Envio. Retorna o item do carrinho com o ID. */
+  async addToCart(payload: CartItemPayload): Promise<any> {
+    return this.request('/api/v2/me/cart', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  }
+
+  /** Finaliza a compra do(s) item(ns) no carrinho, debitando da carteira virtual. */
+  async checkoutCart(cartIds: string[]): Promise<any> {
+    return this.request('/api/v2/me/shipment/checkout', {
+      method: 'POST',
+      body: JSON.stringify({ orders: cartIds }),
+    });
   }
 }
