@@ -66,6 +66,14 @@ import { HealthModule } from './health/health.module';
           producerOnlyMode: true,
         },
       },
+      {
+        name: 'USERS_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.USERS_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.USERS_SERVICE_PORT ?? 4001),
+        },
+      },
     ]),
   ],
   controllers: [AuthController],

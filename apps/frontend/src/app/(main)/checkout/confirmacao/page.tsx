@@ -1,9 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function ConfirmacaoPage() {
+function ConfirmacaoContent() {
   const params = useSearchParams();
   const orderId = params.get("orderId");
 
@@ -76,5 +77,13 @@ export default function ConfirmacaoPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ConfirmacaoPage() {
+  return (
+    <Suspense fallback={<div className="min-h-[calc(100vh-63px)] flex items-center justify-center font-bold text-blue">Aguarde...</div>}>
+      <ConfirmacaoContent />
+    </Suspense>
   );
 }

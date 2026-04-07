@@ -49,4 +49,23 @@ export class KafkaOrdersEventsPublisher
       }),
     );
   }
+
+  async publishOrderPaid(order: OrderEntity): Promise<void> {
+    await firstValueFrom(
+      this.kafkaClient.emit('order.paid', {
+        orderId: order.id,
+        userId: order.userId,
+        items: order.items.map((item) => ({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+        addressSnapshot: order.addressSnapshot,
+        shippingFee: order.shippingFee,
+        total: order.total,
+        paidAt: order.updatedAt.toISOString(),
+      }),
+    );
+  }
 }

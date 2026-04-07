@@ -13,7 +13,7 @@ export class CreateUserUseCase {
     private readonly usersEventsPublisher: UsersEventsPublisher,
   ) {}
 
-  async execute(input: { name: string; email: string }): Promise<UserEntity> {
+  async execute(input: { id?: number; name: string; email: string }): Promise<UserEntity> {
     const createdUser = await this.usersRepository.create(input);
     await this.usersEventsPublisher.publishUserCreated(createdUser);
     return createdUser;

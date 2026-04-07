@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.json$|\\\\.yml$|\\\\.yaml$|\\\\.env\")"
+      "Bash(grep -E \"\\\\.json$|\\\\.yml$|\\\\.yaml$|\\\\.env\")",
+      "Bash(curl -s -X POST http://localhost:3010/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@aguiadiesel.com.br\",\"password\":\"admin@123\"}')",
+      "Bash(curl -s -X POST http://localhost:3010/auth/login -H 'Content-Type: application/json' -d '{\"email\":\"admin@aguiadiesel.com.br\",\"password\":\"admin@123\"}')",
+      "Bash(curl -s -X POST http://localhost:3010/products/categories -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AYWd1aWFkaWVzZWwuY29tLmJyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc1NTg1NzIwLCJleHAiOjE3NzU1ODY2MjB9.qFXF6hB6BTbDvHCkEBKwTRmJpwCX04Svu5u3RXYtf7w' -d '{\"name\":\"Peças de Motor\",\"slug\":\"pecas-de-motor\"}')",
+      "Bash(curl -s http://localhost:3010/products/categories -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AYWd1aWFkaWVzZWwuY29tLmJyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc1NTg1NzIwLCJleHAiOjE3NzU1ODY2MjB9.qFXF6hB6BTbDvHCkEBKwTRmJpwCX04Svu5u3RXYtf7w')",
+      "Bash(xargs grep:*)",
+      "Bash(xargs cat:*)",
+      "Bash(docker exec:*)"
     ]
   }
 }

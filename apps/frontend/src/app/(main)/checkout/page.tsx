@@ -64,7 +64,11 @@ export default function CheckoutPage() {
     setSubmitting(true);
     try {
       const order = await checkout(
-        { items: items.map((i) => ({ productId: i.productId, quantity: i.quantity })), address },
+        {
+          items: items.map((i) => ({ productId: String(i.productId), name: i.name, price: i.price, quantity: i.quantity })),
+          shippingFee: SHIPPING_FEE,
+          addressSnapshot: JSON.stringify(address),
+        },
         accessToken
       );
       clearCart();
