@@ -31,7 +31,17 @@ export class PrismaProductsRepository implements ProductsRepository {
   }
 
   async create(data: CreateProductInput): Promise<ProductEntity> {
-    const p = await this.prisma.product.create({ data });
+    const p = await this.prisma.product.create({
+      data: {
+        name: data.name,
+        slug: data.slug,
+        price: data.price,
+        stock: data.stock,
+        description: data.description,
+        imageUrl: data.imageUrl,
+        categoryId: data.categoryId,
+      },
+    });
     return this.toDomain(p);
   }
 
@@ -39,7 +49,18 @@ export class PrismaProductsRepository implements ProductsRepository {
     const existing = await this.prisma.product.findUnique({ where: { id } });
     if (!existing) throw new NotFoundException('Product not found');
 
-    const p = await this.prisma.product.update({ where: { id }, data });
+    const p = await this.prisma.product.update({
+      where: { id },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.slug !== undefined && { slug: data.slug }),
+        ...(data.price !== undefined && { price: data.price }),
+        ...(data.stock !== undefined && { stock: data.stock }),
+        ...(data.description !== undefined && { description: data.description }),
+        ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
+        ...(data.categoryId !== undefined && { categoryId: data.categoryId }),
+      },
+    });
     return this.toDomain(p);
   }
 

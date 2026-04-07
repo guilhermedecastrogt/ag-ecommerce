@@ -1,7 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthController } from './auth.controller';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
 
+@Global()
 @Module({
   imports: [
     ClientsModule.register([
@@ -16,5 +19,7 @@ import { AuthController } from './auth.controller';
     ]),
   ],
   controllers: [AuthController],
+  providers: [JwtAuthGuard, RolesGuard],
+  exports: [JwtAuthGuard, RolesGuard, ClientsModule],
 })
 export class AuthModule {}

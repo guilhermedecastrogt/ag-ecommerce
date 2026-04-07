@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -82,7 +83,7 @@ function ConfirmacaoContent() {
 
 export default function ConfirmacaoPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<div className="min-h-[calc(100vh-63px)] flex items-center justify-center font-bold text-blue">Aguarde...</div>}>
       <ConfirmacaoContent />
     </Suspense>
   );

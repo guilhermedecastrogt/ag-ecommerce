@@ -25,7 +25,9 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
   }
 
   async create(data: CreateCategoryInput): Promise<CategoryEntity> {
-    const c = await this.prisma.category.create({ data });
+    const c = await this.prisma.category.create({
+      data: { name: data.name, slug: data.slug },
+    });
     return new CategoryEntity(c.id, c.name, c.slug);
   }
 
@@ -33,7 +35,10 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     const existing = await this.prisma.category.findUnique({ where: { id } });
     if (!existing) throw new NotFoundException('Category not found');
 
-    const c = await this.prisma.category.update({ where: { id }, data });
+    const c = await this.prisma.category.update({
+      where: { id },
+      data: { name: data.name, slug: data.slug },
+    });
     return new CategoryEntity(c.id, c.name, c.slug);
   }
 
