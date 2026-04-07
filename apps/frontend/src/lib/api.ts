@@ -29,7 +29,7 @@ export interface Order {
   shippingFee: number;
   discount: number;
   total: number;
-  addressSnapshot: AddressSnapshot;
+  addressSnapshot: AddressSnapshot | null;
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;
@@ -67,6 +67,19 @@ async function request<T>(
     throw new Error(body?.message ?? `HTTP ${res.status}`);
   }
   return res.json();
+}
+
+function parseAddressSnapshot(raw: string | null | undefined): AddressSnapshot | null {
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as AddressSnapshot;
+  } catch {
+    return null;
+  }
+}
+
+function parseOrder(raw: Order & { addressSnapshot: string | null }): Order {
+  return { ...raw, addressSnapshot: parseAddressSnapshot(raw.addressSnapshot) };
 }
 
 function authHeaders(token: string) {
@@ -126,29 +139,33 @@ export function logout(token: string): Promise<void> {
 
 /* ── Orders ─────────────────────────────────────── */
 export interface CheckoutPayload {
-  items: { productId: string; quantity: number }[];
-  address: AddressSnapshot;
+  items: { productId: string; name: string; price: number; quantity: number }[];
+  shippingFee?: number;
+  discount?: number;
+  addressSnapshot: string;
 }
 
-export function checkout(
+export async function checkout(
   payload: CheckoutPayload,
   token: string
 ): Promise<Order> {
-  return request<Order>("/orders/checkout", {
+  const raw = await request<Order & { addressSnapshot: string | null }>("/orders/checkout", {
     method: "POST",
     headers: authHeaders(token),
     body: JSON.stringify(payload),
   });
+  return parseOrder(raw);
 }
 
-export function fetchMyOrders(token: string): Promise<Order[]> {
-  return request<Order[]>("/orders/my-orders", {
+export async function fetchMyOrders(token: string): Promise<Order[]> {
+  const raw = await request<(Order & { addressSnapshot: string | null })[]>("/orders/my-orders", {
     headers: authHeaders(token),
   });
+  return raw.map(parseOrder);
 }
 
 export function cancelOrder(
-  orderId: string,
+  orderId: string | number,
   token: string
 ): Promise<Order> {
   return request<Order>("/orders/cancel", {

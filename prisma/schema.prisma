@@ -97,3 +97,18 @@ model MelhorEnvioToken {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model ShipmentLabel {
+  id           Int      @id @default(autoincrement())
+  orderId      Int      @unique
+  cartItemId   String   // ID do item no carrinho do Melhor Envio
+  serviceId    Int
+  serviceName  String
+  trackingCode String?
+  labelUrl     String?  @db.Text
+  price        String?  // valor cobrado (string como retornado pela API)
+  status       String   @default("PURCHASED") // PURCHASED, CANCELLED
+  purchasedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

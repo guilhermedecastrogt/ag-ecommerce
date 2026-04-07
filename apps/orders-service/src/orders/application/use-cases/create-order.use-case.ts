@@ -2,8 +2,8 @@ import {
   BadRequestException,
   Inject,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
+import { KnownUserEntity } from '../../domain/entities/known-user.entity';
 import { OrderEntity } from '../../domain/entities/order.entity';
 import { OrderStatus } from '../../domain/entities/order-status.enum';
 import type { KnownUsersRepository } from '../../domain/repositories/known-users.repository';
@@ -46,9 +46,12 @@ export class CreateOrderUseCase {
       throw new BadRequestException('O pedido deve conter ao menos um item');
     }
 
+    // Ensure the user exists in the local registry (JWT already validates auth)
     const knownUser = await this.knownUsersRepository.findById(input.userId);
     if (!knownUser) {
-      throw new NotFoundException('Usuário não encontrado no catálogo local');
+      await this.knownUsersRepository.upsert(
+        new KnownUserEntity(input.userId, '', '', new Date()),
+      );
     }
 
     const shippingFee = input.shippingFee ?? 0;
