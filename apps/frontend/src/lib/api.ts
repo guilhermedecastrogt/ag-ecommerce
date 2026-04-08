@@ -58,9 +58,14 @@ async function request<T>(
   path: string,
   options: RequestInit = {}
 ): Promise<T> {
+  const mergedHeaders = new Headers(options.headers);
+  if (!mergedHeaders.has("Content-Type")) {
+    mergedHeaders.set("Content-Type", "application/json");
+  }
+
   const res = await fetch(`${API}${path}`, {
-    headers: { "Content-Type": "application/json", ...options.headers },
     ...options,
+    headers: mergedHeaders,
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -172,5 +177,44 @@ export function cancelOrder(
     method: "POST",
     headers: authHeaders(token),
     body: JSON.stringify({ orderId }),
+  });
+}
+
+/* ── Shipping ───────────────────────────────────── */
+export interface ShippingRate {
+  id: number;
+  name: string;
+  price: string;
+  custom_price: string;
+  delivery_time: number;
+  company: string;
+  error?: string;
+}
+
+export function calculateFreight(payload: { toPostalCode: string; items: any[] }): Promise<ShippingRate[]> {
+  return request<ShippingRate[]>("/shipping/calculate", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export interface ShipmentLabel {
+  id: number;
+  orderId: number;
+  cartItemId: string;
+  serviceId: number;
+  serviceName: string;
+  trackingCode: string | null;
+  labelUrl: string | null;
+  price: string | null;
+  status: string;
+  purchasedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function fetchShippingLabel(orderId: string | number, token: string): Promise<ShipmentLabel> {
+  return request<ShipmentLabel>(`/shipping/${orderId}`, {
+    headers: authHeaders(token),
   });
 }

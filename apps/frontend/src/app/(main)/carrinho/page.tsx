@@ -8,12 +8,10 @@ function formatBRL(v: number) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-const SHIPPING_FEE = 29.9;
-
 export default function CarrinhoPage() {
   const { items, totalPrice, updateQuantity, removeItem, clearCart } = useCart();
   const isEmpty = items.length === 0;
-  const total = totalPrice + (isEmpty ? 0 : SHIPPING_FEE);
+  const total = totalPrice; // Frete is calculated at checkout
   const totalQty = items.reduce((s, i) => s + i.quantity, 0);
 
   if (isEmpty) {
@@ -164,7 +162,7 @@ export default function CarrinhoPage() {
                 </div>
                 <div className="flex justify-between text-sm text-white/40">
                   <span>Frete estimado</span>
-                  <span className="font-semibold text-white/60">{formatBRL(SHIPPING_FEE)}</span>
+                  <span className="font-semibold text-white/60">A calcular no checkout</span>
                 </div>
                 <div className="flex justify-between pt-3 border-t border-white/[0.06]">
                   <span className="font-[var(--font-display)] text-white font-extrabold uppercase tracking-wider text-sm">Total</span>

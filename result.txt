@@ -1,0 +1,2 @@
+﻿id	orderId	cartItemId	serviceId	status
+1	10001	a17f1890-a638-4c8e-8f2b-711ff3edc333	3	PURCHASED

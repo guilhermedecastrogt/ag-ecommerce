@@ -1,0 +1,30 @@
+✔ Generated Prisma Client (v6.17.1) to ./node_modules/@prisma/client in 405ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+
+
+> microsservices@0.0.1 start:shipping
+> nest start shipping-service
+
+webpack 5.104.1 compiled [1m[32msuccessfully[39m[22m in 1040 ms
+[32m[Nest] 113  - [39m04/08/2026, 6:20:46 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 113  - [39m04/08/2026, 6:20:46 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTerminusModule dependencies initialized[39m[38;5;3m +87ms[39m
+[32m[Nest] 113  - [39m04/08/2026, 6:20:46 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLoggerModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 113  - [39m04/08/2026, 6:20:46 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHealthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 113  - [39m04/08/2026, 6:20:46 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mShippingServiceModule dependencies initialized[39m[38;5;3m +6ms[39m
+{"level":40,"time":1775672446452,"pid":113,"hostname":"ceb1ac5bfd34","context":"ServerKafka","msg":"WARN [undefined] KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\" {\"timestamp\":\"2026-04-08T18:20:46.452Z\",\"logger\":\"kafkajs\"}"}
+{"level":30,"time":1775672446470,"pid":113,"hostname":"ceb1ac5bfd34","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672446559,"pid":113,"hostname":"ceb1ac5bfd34","context":"ServerKafka","msg":"INFO [Consumer] Starting {\"timestamp\":\"2026-04-08T18:20:46.559Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\"}"}
+{"level":30,"time":1775672449610,"pid":113,"hostname":"ceb1ac5bfd34","context":"ServerKafka","msg":"INFO [ConsumerGroup] Consumer has joined the group {\"timestamp\":\"2026-04-08T18:20:49.609Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\",\"memberId\":\"shipping-service-consumer-server-fdbbade6-b8df-4abe-bb58-13bd50e78148\",\"leaderId\":\"shipping-service-consumer-server-fdbbade6-b8df-4abe-bb58-13bd50e78148\",\"isLeader\":true,\"memberAssignment\":{\"shipping.auth.getUrl\":[0],\"shipping.auth.callback\":[0],\"shipping.calculateFreight\":[0],\"order.paid\":[0]},\"groupProtocol\":\"RoundRobinAssigner\",\"duration\":3049}"}
+{"level":30,"time":1775672449612,"pid":113,"hostname":"ceb1ac5bfd34","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672449645,"pid":113,"hostname":"ceb1ac5bfd34","context":"RoutesResolver","msg":"ShippingServiceController {/}:"}
+{"level":30,"time":1775672449646,"pid":113,"hostname":"ceb1ac5bfd34","context":"RoutesResolver","msg":"HealthController {/health}:"}
+{"level":30,"time":1775672449651,"pid":113,"hostname":"ceb1ac5bfd34","context":"RouterExplorer","msg":"Mapped {/health, GET} route"}
+{"level":30,"time":1775672449699,"pid":113,"hostname":"ceb1ac5bfd34","context":"NestApplication","msg":"Nest application successfully started"}
+{"level":30,"time":1775672449723,"pid":113,"hostname":"ceb1ac5bfd34","context":"ShippingServiceController","msg":"Received order.paid for orderId=10001"}
+{"level":30,"time":1775672449738,"pid":113,"hostname":"ceb1ac5bfd34","context":"PurchaseLabelUseCase","msg":"Adding order=10001 to Melhor Envio cart..."}
+{"level":30,"time":1775672450672,"pid":113,"hostname":"ceb1ac5bfd34","req":{"id":1,"method":"GET","url":"/health","query":{},"params":{"path":["health"]},"headers":{"host":"127.0.0.1:4015","user-agent":"Wget","accept":"*/*","connection":"close"},"remoteAddress":"127.0.0.1","remotePort":53938},"service":"shipping-service","res":{"statusCode":200,"headers":{"x-powered-by":"Express","cache-control":"no-cache, no-store, must-revalidate","content-type":"application/json; charset=utf-8","content-length":"101","etag":"W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""}},"responseTime":33,"msg":"request completed"}
+{"level":30,"time":1775672450923,"pid":113,"hostname":"ceb1ac5bfd34","context":"PurchaseLabelUseCase","msg":"Cart item created: a17f1890-a638-4c8e-8f2b-711ff3edc333. Checking out..."}
+{"level":30,"time":1775672451720,"pid":113,"hostname":"ceb1ac5bfd34","context":"PurchaseLabelUseCase","msg":"Label purchased successfully for order=10001. Tracking: pending"}

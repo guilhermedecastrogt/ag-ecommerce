@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import React, { useState, useEffect, use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import { fetchMyOrders, cancelOrder, Order } from "@/lib/api";
+import { fetchMyOrders, cancelOrder, fetchShippingLabel, Order, ShipmentLabel } from "@/lib/api";
 
 function formatBRL(v: number) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -28,6 +28,14 @@ export default function PedidoDetailPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [cancelling, setCancelling] = useState(false);
+  const [label, setLabel] = useState<ShipmentLabel | null>(null);
+
+  useEffect(() => {
+    if (!order || !accessToken) return;
+    fetchShippingLabel(order.id, accessToken)
+      .then(setLabel)
+      .catch((e) => console.log('Sem label / Erro rastreio', e.message));
+  }, [order, accessToken]);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) router.push("/auth/login");
@@ -185,6 +193,36 @@ export default function PedidoDetailPage({ params }: { params: Promise<{ id: str
             <p className="text-blue/25 text-[0.65rem] mt-4 pt-4 border-t border-neutral-border">{formatDate(order.createdAt)}</p>
           </div>
         </div>
+
+        {/* Rastreamento */}
+        {label && (
+          <div className="bg-white rounded-xl border border-neutral-border overflow-hidden">
+            <div className="px-5 py-4 border-b border-neutral-border">
+              <h2 className="font-[var(--font-display)] text-blue text-sm font-extrabold uppercase tracking-wide">Rastreamento e Frete</h2>
+            </div>
+            <div className="px-5 py-5 space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-blue/45">Transportadora</span>
+                <span className="font-bold text-blue">{label.serviceName || `Serviço ${label.serviceId}`}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-blue/45">Status</span>
+                <span className="font-bold text-blue">{label.status}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-blue/45">Rastreio</span>
+                <span className="font-mono font-bold text-blue tracking-wide">{label.trackingCode || "Pendente"}</span>
+              </div>
+              {label.labelUrl && (
+                <div className="pt-4 border-t border-neutral-border mt-2">
+                  <a href={label.labelUrl} target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-blue text-white text-xs font-bold uppercase tracking-[0.1em] py-3 rounded-lg hover:bg-blue/90 transition-colors">
+                    Acessar Etiqueta
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Back link */}
         <div className="sm:col-span-2">
