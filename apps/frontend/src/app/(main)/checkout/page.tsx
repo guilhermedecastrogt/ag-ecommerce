@@ -1,17 +1,15 @@
 "use client";
 
-import { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { checkout } from "@/lib/api";
+import { checkout, calculateFreight, ShippingRate } from "@/lib/api";
 
 function formatBRL(v: number) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
-
-const SHIPPING_FEE = 29.9;
 const STATES = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
 
 interface Address {
@@ -42,6 +40,10 @@ export default function CheckoutPage() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  const [shippingRates, setShippingRates] = useState<ShippingRate[]>([]);
+  const [selectedRate, setSelectedRate] = useState<ShippingRate | null>(null);
+  const [calculatingFreight, setCalculatingFreight] = useState(false);
+
   useEffect(() => {
     if (!isLoading && !isAuthenticated) router.push("/auth/login?redirect=/checkout");
   }, [isLoading, isAuthenticated, router]);
@@ -54,19 +56,37 @@ export default function CheckoutPage() {
     if (user) setAddress((a) => ({ ...a, name: user.name }));
   }, [user]);
 
-  const set = (field: keyof Address) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-    setAddress((a) => ({ ...a, [field]: e.target.value }));
+  const set = (field: keyof Address) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    let val = e.target.value;
+    if (field === "zipCode") val = val.replace(/\D/g, "").slice(0, 8);
+    setAddress((a) => ({ ...a, [field]: val }));
+  };
+
+  useEffect(() => {
+    if (address.zipCode.length === 8 && items.length > 0) {
+      setCalculatingFreight(true);
+      calculateFreight({ toPostalCode: address.zipCode, items })
+        .then((rates) => {
+          const validRates = rates.filter((r) => !r.error && Number(r.price) > 0);
+          setShippingRates(validRates);
+          if (validRates.length > 0) setSelectedRate(validRates[0]);
+        })
+        .catch(() => setShippingRates([]))
+        .finally(() => setCalculatingFreight(false));
+    }
+  }, [address.zipCode, items]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!accessToken) return;
+    console.log("Submitting checkout with token...");
     setError("");
     setSubmitting(true);
     try {
       const order = await checkout(
         {
           items: items.map((i) => ({ productId: String(i.productId), name: i.name, price: i.price, quantity: i.quantity })),
-          shippingFee: SHIPPING_FEE,
+          shippingFee: selectedRate ? Number(selectedRate.price) : 0,
           addressSnapshot: JSON.stringify(address),
         },
         accessToken
@@ -88,7 +108,8 @@ export default function CheckoutPage() {
     );
   }
 
-  const total = totalPrice + SHIPPING_FEE;
+  const shippingFee = selectedRate ? Number(selectedRate.price) : 0;
+  const total = totalPrice + shippingFee;
 
   const inputClass = "w-full bg-white border border-neutral-border rounded-xl px-4 py-3 text-sm text-blue placeholder-blue/25 focus:outline-none focus:border-blue/50 focus:ring-2 focus:ring-blue/8 transition-all";
   const labelClass = "block text-[0.68rem] font-extrabold text-blue/45 uppercase tracking-[0.12em] mb-1.5";
@@ -176,6 +197,44 @@ export default function CheckoutPage() {
               </div>
             </div>
 
+            {/* Carriers selection */}
+            {address.zipCode.length === 8 && (
+              <div className="bg-white rounded-2xl border border-neutral-border overflow-hidden mt-6">
+                <div className="px-6 py-5 border-b border-neutral-border flex items-center justify-between">
+                  <h2 className="font-[var(--font-display)] text-blue text-sm font-extrabold uppercase tracking-wide">
+                    Opções de Envio
+                  </h2>
+                  {calculatingFreight && <span className="w-4 h-4 border-2 border-blue/30 border-t-blue rounded-full animate-spin" />}
+                </div>
+                <div className="p-6">
+                  {shippingRates.length === 0 && !calculatingFreight ? (
+                    <p className="text-sm text-blue/40 italic">Nenhuma transportadora disponível para este CEP no momento.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {shippingRates.map((rate) => (
+                        <label key={rate.id} className={`flex items-center justify-between p-4 border rounded-xl cursor-pointer transition-colors ${selectedRate?.id === rate.id ? "border-blue bg-blue/5" : "border-neutral-border hover:border-blue/30"}`}>
+                          <div className="flex items-center gap-3">
+                            <input
+                              type="radio"
+                              name="shippingRate"
+                              className="w-4 h-4 text-blue"
+                              checked={selectedRate?.id === rate.id}
+                              onChange={() => setSelectedRate(rate)}
+                            />
+                            <div>
+                              <p className="font-bold text-blue text-sm">{rate.company || rate.name}</p>
+                              <p className="text-xs text-blue/50">Entrega em até {rate.delivery_time} dia(s)</p>
+                            </div>
+                          </div>
+                          <span className="font-extrabold text-blue">{formatBRL(Number(rate.price))}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Order summary — dark */}
             <div className="lg:col-span-1">
               <div className="bg-[#001429] rounded-2xl overflow-hidden sticky top-24">
@@ -203,7 +262,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between text-sm text-white/40">
                     <span>Frete</span>
-                    <span className="text-white/60 font-semibold">{formatBRL(SHIPPING_FEE)}</span>
+                    <span className="text-white/60 font-semibold">{formatBRL(shippingFee)}</span>
                   </div>
                   <div className="flex justify-between pt-3 border-t border-white/[0.06]">
                     <span className="font-[var(--font-display)] text-white font-extrabold uppercase tracking-wider text-sm">Total</span>

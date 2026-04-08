@@ -1,0 +1,30 @@
+✔ Generated Prisma Client (v6.17.1) to ./node_modules/@prisma/client in 357ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+
+
+> microsservices@0.0.1 start:shipping
+> nest start shipping-service
+
+webpack 5.104.1 compiled [1m[32msuccessfully[39m[22m in 15044 ms
+[32m[Nest] 116  - [39m04/08/2026, 6:15:25 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 116  - [39m04/08/2026, 6:15:25 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTerminusModule dependencies initialized[39m[38;5;3m +87ms[39m
+[32m[Nest] 116  - [39m04/08/2026, 6:15:25 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLoggerModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 116  - [39m04/08/2026, 6:15:25 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHealthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 116  - [39m04/08/2026, 6:15:25 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mShippingServiceModule dependencies initialized[39m[38;5;3m +1ms[39m
+{"level":40,"time":1775672125981,"pid":116,"hostname":"10c053cda18f","context":"ServerKafka","msg":"WARN [undefined] KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\" {\"timestamp\":\"2026-04-08T18:15:25.978Z\",\"logger\":\"kafkajs\"}"}
+{"level":30,"time":1775672126034,"pid":116,"hostname":"10c053cda18f","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672126301,"pid":116,"hostname":"10c053cda18f","context":"ServerKafka","msg":"INFO [Consumer] Starting {\"timestamp\":\"2026-04-08T18:15:26.301Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\"}"}
+{"level":30,"time":1775672129409,"pid":116,"hostname":"10c053cda18f","context":"ServerKafka","msg":"INFO [ConsumerGroup] Consumer has joined the group {\"timestamp\":\"2026-04-08T18:15:29.408Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\",\"memberId\":\"shipping-service-consumer-server-88a591bb-c748-4400-9536-b8d7c094bf1a\",\"leaderId\":\"shipping-service-consumer-server-88a591bb-c748-4400-9536-b8d7c094bf1a\",\"isLeader\":true,\"memberAssignment\":{\"shipping.auth.getUrl\":[0],\"shipping.auth.callback\":[0],\"shipping.calculateFreight\":[0],\"order.paid\":[0]},\"groupProtocol\":\"RoundRobinAssigner\",\"duration\":3094}"}
+{"level":30,"time":1775672129414,"pid":116,"hostname":"10c053cda18f","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672129453,"pid":116,"hostname":"10c053cda18f","context":"RoutesResolver","msg":"ShippingServiceController {/}:"}
+{"level":30,"time":1775672129454,"pid":116,"hostname":"10c053cda18f","context":"RoutesResolver","msg":"HealthController {/health}:"}
+{"level":30,"time":1775672129459,"pid":116,"hostname":"10c053cda18f","context":"RouterExplorer","msg":"Mapped {/health, GET} route"}
+{"level":30,"time":1775672129525,"pid":116,"hostname":"10c053cda18f","context":"NestApplication","msg":"Nest application successfully started"}
+{"level":40,"time":1775672129556,"pid":116,"hostname":"10c053cda18f","context":"ShippingServiceController","msg":"Failed to parse payload for order.paid:  "}
+{"level":30,"time":1775672129558,"pid":116,"hostname":"10c053cda18f","context":"ShippingServiceController","msg":"Received order.paid for orderId=9999"}
+{"level":30,"time":1775672129571,"pid":116,"hostname":"10c053cda18f","context":"PurchaseLabelUseCase","msg":"Adding order=9999 to Melhor Envio cart..."}
+{"level":50,"time":1775672130536,"pid":116,"hostname":"10c053cda18f","context":"PurchaseLabelUseCase","msg":"Failed to add order=9999 to cart: Melhor Envio error [/api/v2/me/cart]: {\"message\":\"O campo from.document deve ter um CPF v\\u00e1lido (and 3 more errors)\",\"errors\":{\"from.document\":[\"O campo from.document deve ter um CPF v\\u00e1lido\"],\"from.postal_code\":[\"O from.postal code informado \\u00e9 inv\\u00e1lido. Por favor, verifique e tente novamente.\"],\"to.document\":[\"O campo to.document deve ter um CPF v\\u00e1lido\"],\"to.postal_code\":[\"O to.postal code informado \\u00e9 inv\\u00e1lido. Por favor, verifique e tente novamente.\"]}}"}
+{"level":30,"time":1775672130938,"pid":116,"hostname":"10c053cda18f","req":{"id":1,"method":"GET","url":"/health","query":{},"params":{"path":["health"]},"headers":{"host":"127.0.0.1:4015","user-agent":"Wget","accept":"*/*","connection":"close"},"remoteAddress":"127.0.0.1","remotePort":43550},"service":"shipping-service","res":{"statusCode":200,"headers":{"x-powered-by":"Express","cache-control":"no-cache, no-store, must-revalidate","content-type":"application/json; charset=utf-8","content-length":"101","etag":"W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""}},"responseTime":22,"msg":"request completed"}

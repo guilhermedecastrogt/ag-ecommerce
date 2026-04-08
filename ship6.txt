@@ -1,0 +1,30 @@
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+
+
+> microsservices@0.0.1 start:shipping
+> nest start shipping-service
+
+webpack 5.104.1 compiled [1m[32msuccessfully[39m[22m in 17948 ms
+[32m[Nest] 106  - [39m04/08/2026, 6:18:33 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 106  - [39m04/08/2026, 6:18:33 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTerminusModule dependencies initialized[39m[38;5;3m +79ms[39m
+[32m[Nest] 106  - [39m04/08/2026, 6:18:33 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLoggerModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 106  - [39m04/08/2026, 6:18:33 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHealthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 106  - [39m04/08/2026, 6:18:33 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mShippingServiceModule dependencies initialized[39m[38;5;3m +0ms[39m
+{"level":40,"time":1775672313993,"pid":106,"hostname":"faf6e74557ea","context":"ServerKafka","msg":"WARN [undefined] KafkaJS v2.0.0 switched default partitioner. To retain the same partitioning behavior as in previous versions, create the producer with the option \"createPartitioner: Partitioners.LegacyPartitioner\". See the migration guide at https://kafka.js.org/docs/migration-guide-v2.0.0#producer-new-default-partitioner for details. Silence this warning by setting the environment variable \"KAFKAJS_NO_PARTITIONER_WARNING=1\" {\"timestamp\":\"2026-04-08T18:18:33.991Z\",\"logger\":\"kafkajs\"}"}
+{"level":30,"time":1775672314020,"pid":106,"hostname":"faf6e74557ea","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672314161,"pid":106,"hostname":"faf6e74557ea","context":"ServerKafka","msg":"INFO [Consumer] Starting {\"timestamp\":\"2026-04-08T18:18:34.161Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\"}"}
+{"level":30,"time":1775672300661,"pid":106,"hostname":"faf6e74557ea","context":"ServerKafka","msg":"INFO [ConsumerGroup] Consumer has joined the group {\"timestamp\":\"2026-04-08T18:18:20.661Z\",\"logger\":\"kafkajs\",\"groupId\":\"shipping-service-group-server\",\"memberId\":\"shipping-service-consumer-server-7cefb1a1-fbc1-4633-880e-640e21b878bf\",\"leaderId\":\"shipping-service-consumer-server-7cefb1a1-fbc1-4633-880e-640e21b878bf\",\"isLeader\":true,\"memberAssignment\":{\"shipping.auth.getUrl\":[0],\"shipping.auth.callback\":[0],\"shipping.calculateFreight\":[0],\"order.paid\":[0]},\"groupProtocol\":\"RoundRobinAssigner\",\"duration\":-13505}"}
+{"level":30,"time":1775672300663,"pid":106,"hostname":"faf6e74557ea","context":"NestMicroservice","msg":"Nest microservice successfully started"}
+{"level":30,"time":1775672300688,"pid":106,"hostname":"faf6e74557ea","context":"RoutesResolver","msg":"ShippingServiceController {/}:"}
+{"level":30,"time":1775672300688,"pid":106,"hostname":"faf6e74557ea","context":"RoutesResolver","msg":"HealthController {/health}:"}
+{"level":30,"time":1775672300692,"pid":106,"hostname":"faf6e74557ea","context":"RouterExplorer","msg":"Mapped {/health, GET} route"}
+{"level":30,"time":1775672300775,"pid":106,"hostname":"faf6e74557ea","context":"NestApplication","msg":"Nest application successfully started"}
+{"level":30,"time":1775672300797,"pid":106,"hostname":"faf6e74557ea","context":"ShippingServiceController","msg":"Received order.paid for orderId=10000"}
+{"level":30,"time":1775672300862,"pid":106,"hostname":"faf6e74557ea","context":"PurchaseLabelUseCase","msg":"Adding order=10000 to Melhor Envio cart..."}
+{"level":30,"time":1775672300888,"pid":106,"hostname":"faf6e74557ea","req":{"id":1,"method":"GET","url":"/health","query":{},"params":{"path":["health"]},"headers":{"host":"127.0.0.1:4015","user-agent":"Wget","accept":"*/*","connection":"close"},"remoteAddress":"127.0.0.1","remotePort":52414},"service":"shipping-service","res":{"statusCode":200,"headers":{"x-powered-by":"Express","cache-control":"no-cache, no-store, must-revalidate","content-type":"application/json; charset=utf-8","content-length":"101","etag":"W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""}},"responseTime":49,"msg":"request completed"}
+{"level":50,"time":1775672318525,"pid":106,"hostname":"faf6e74557ea","context":"PurchaseLabelUseCase","msg":"Failed to add order=10000 to cart: Melhor Envio error [/api/v2/me/cart]: {\"error\":\"Houve um erro ao verificar o valor do pedido: Transportadora n\\u00e3o atende este trecho.\"}"}
+{"level":30,"time":1775672311074,"pid":106,"hostname":"faf6e74557ea","req":{"id":2,"method":"GET","url":"/health","query":{},"params":{"path":["health"]},"headers":{"host":"127.0.0.1:4015","user-agent":"Wget","accept":"*/*","connection":"close"},"remoteAddress":"127.0.0.1","remotePort":33442},"service":"shipping-service","res":{"statusCode":200,"headers":{"x-powered-by":"Express","cache-control":"no-cache, no-store, must-revalidate","content-type":"application/json; charset=utf-8","content-length":"101","etag":"W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""}},"responseTime":15,"msg":"request completed"}
+{"level":30,"time":1775672321481,"pid":106,"hostname":"faf6e74557ea","req":{"id":3,"method":"GET","url":"/health","query":{},"params":{"path":["health"]},"headers":{"host":"127.0.0.1:4015","user-agent":"Wget","accept":"*/*","connection":"close"},"remoteAddress":"127.0.0.1","remotePort":41118},"service":"shipping-service","res":{"statusCode":200,"headers":{"x-powered-by":"Express","cache-control":"no-cache, no-store, must-revalidate","content-type":"application/json; charset=utf-8","content-length":"101","etag":"W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""}},"responseTime":20,"msg":"request completed"}

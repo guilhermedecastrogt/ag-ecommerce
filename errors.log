@@ -1,0 +1,23 @@
+﻿
+>       "type": "TypeError",
+        "message": "Cannot read 
+properties of undefined (reading 
+'items')",
+        "stack":
+>           TypeError: Cannot read 
+properties of undefined (reading 
+'items')
+                at 
+OrdersController.checkout (/app/dist/
+apps/api-gateway/main.js:610:28)
+                at /app/node_modules/
+@nestjs/core/router/router-execution-
+context.js:38:29
+                at 
+process.processTicksAndRejections (no
+de:internal/process/task_queues:95:5)
+      }
+  [18:43:14.826] [32mINFO[39m 
+(60): [36mrequest errored[39m
+
+

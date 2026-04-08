@@ -1,0 +1,72 @@
+﻿
+        "id": 287,
+        "method": "POST",
+>       "url": "/auth/login",
+        "query": {},
+        "params": {
+          "path": [
+            "auth",
+>           "login"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+        "id": 287,
+        "method": "POST",
+>       "url": "/auth/login",
+        "query": {},
+        "params": {
+          "path": [
+            "auth",
+>           "login"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+        "id": 296,
+        "method": "POST",
+>       "url": "/orders/checkout",
+        "query": {},
+        "params": {
+          "path": [
+            "orders",
+>           "checkout"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+        "stack":
+            TypeError: Cannot read 
+properties of undefined (reading 
+'items')
+>               at 
+OrdersController.checkout (/app/dist/
+apps/api-gateway/main.js:610:28)
+                at /app/node_modules/
+@nestjs/core/router/router-execution-
+context.js:38:29
+                at 
+process.processTicksAndRejections (no
+de:internal/process/task_queues:95:5)
+      }
+  [18:43:14.826] [32mINFO[39m 
+(60): [36mrequest errored[39m
+      [35mreq[39m: {
+        "id": 296,
+        "method": "POST",
+>       "url": "/orders/checkout",
+        "query": {},
+        "params": {
+          "path": [
+            "orders",
+>           "checkout"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+
+

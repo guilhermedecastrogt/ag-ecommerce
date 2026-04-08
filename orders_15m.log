@@ -1,0 +1,2816 @@
+﻿[18:41:36.427] INFO (135): request completed
+    req: {
+      "id": 277,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 36836
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:41:46.520] INFO (135): request completed
+    req: {
+      "id": 278,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 34630
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:41:56.644] INFO (135): request completed
+    req: {
+      "id": 279,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 47628
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 16
+[18:42:06.720] INFO (135): request completed
+    req: {
+      "id": 280,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 47452
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:42:16.818] INFO (135): request completed
+    req: {
+      "id": 281,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56252
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 3
+[18:42:26.823] INFO (135): request completed
+    req: {
+      "id": 282,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 55712
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 3
+[18:42:36.914] INFO (135): request completed
+    req: {
+      "id": 283,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60544
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:42:46.999] INFO (135): request completed
+    req: {
+      "id": 284,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 53216
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 3
+[18:42:57.079] INFO (135): request completed
+    req: {
+      "id": 285,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 44232
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:43:07.172] INFO (135): request completed
+    req: {
+      "id": 286,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59818
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:43:17.261] INFO (135): request completed
+    req: {
+      "id": 287,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 37956
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:43:27.371] INFO (135): request completed
+    req: {
+      "id": 288,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46172
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:43:54.247] INFO (135): request completed
+    req: {
+      "id": 289,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 35138
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 12
+[18:44:04.245] INFO (135): request completed
+    req: {
+      "id": 290,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 43286
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:44:14.355] INFO (135): request completed
+    req: {
+      "id": 291,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 34598
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:44:07.784] INFO (135): request completed
+    req: {
+      "id": 292,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50070
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 13
+[18:44:17.912] INFO (135): request completed
+    req: {
+      "id": 293,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 48482
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 11
+[18:44:28.046] INFO (135): request completed
+    req: {
+      "id": 294,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 40884
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:44:38.153] INFO (135): request completed
+    req: {
+      "id": 295,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 53920
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:44:48.393] INFO (135): request completed
+    req: {
+      "id": 296,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 42504
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:44:58.499] INFO (135): request completed
+    req: {
+      "id": 297,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59558
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:45:08.600] INFO (135): request completed
+    req: {
+      "id": 298,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 33616
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:45:18.711] INFO (135): request completed
+    req: {
+      "id": 299,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51968
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:45:28.809] INFO (135): request completed
+    req: {
+      "id": 300,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 48764
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:45:38.898] INFO (135): request completed
+    req: {
+      "id": 301,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46346
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 14
+[18:45:48.982] INFO (135): request completed
+    req: {
+      "id": 302,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59224
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:45:59.067] INFO (135): request completed
+    req: {
+      "id": 303,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 44364
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:46:25.969] INFO (135): request completed
+    req: {
+      "id": 304,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52282
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:46:36.189] INFO (135): request completed
+    req: {
+      "id": 305,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 40252
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 18
+[18:46:29.694] INFO (135): request completed
+    req: {
+      "id": 306,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 36586
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 10
+[18:46:39.804] INFO (135): request completed
+    req: {
+      "id": 307,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46950
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:46:49.917] INFO (135): request completed
+    req: {
+      "id": 308,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 38684
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:46:59.737] INFO (135): request completed
+    req: {
+      "id": 309,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 43230
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:47:09.037] INFO (135): request completed
+    req: {
+      "id": 310,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 49260
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:47:19.166] INFO (135): request completed
+    req: {
+      "id": 311,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 36584
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 13
+[18:47:29.276] INFO (135): request completed
+    req: {
+      "id": 312,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 47404
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 12
+[18:47:39.399] INFO (135): request completed
+    req: {
+      "id": 313,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 35886
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:47:49.527] INFO (135): request completed
+    req: {
+      "id": 314,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46794
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:47:59.655] INFO (135): request completed
+    req: {
+      "id": 315,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 41298
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:48:09.776] INFO (135): request completed
+    req: {
+      "id": 316,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59538
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:48:19.920] INFO (135): request completed
+    req: {
+      "id": 317,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60202
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 10
+[18:48:30.188] INFO (135): request completed
+    req: {
+      "id": 318,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56850
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 13
+[18:48:40.292] INFO (135): request completed
+    req: {
+      "id": 319,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60850
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:48:50.426] INFO (135): request completed
+    req: {
+      "id": 320,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 38572
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:49:00.540] INFO (135): request completed
+    req: {
+      "id": 321,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 34426
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:49:27.413] INFO (135): request completed
+    req: {
+      "id": 322,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 35586
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:49:37.646] INFO (135): request completed
+    req: {
+      "id": 323,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 44880
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 12
+[18:49:31.057] INFO (135): request completed
+    req: {
+      "id": 324,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 39172
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:49:41.152] INFO (135): request completed
+    req: {
+      "id": 325,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50506
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:50:08.034] INFO (135): request completed
+    req: {
+      "id": 326,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52714
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:50:18.153] INFO (135): request completed
+    req: {
+      "id": 327,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 38206
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:50:11.523] INFO (135): request completed
+    req: {
+      "id": 328,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 49226
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:50:21.698] INFO (135): request completed
+    req: {
+      "id": 329,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 43820
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 14
+[18:50:31.762] INFO (135): request completed
+    req: {
+      "id": 330,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 48438
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:50:41.883] INFO (135): request completed
+    req: {
+      "id": 331,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59554
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 12
+[18:50:51.922] INFO (135): request completed
+    req: {
+      "id": 332,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 52444
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:51:02.112] INFO (135): request completed
+    req: {
+      "id": 333,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46320
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 13
+[18:51:12.217] INFO (135): request completed
+    req: {
+      "id": 334,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 45610
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:51:22.324] INFO (135): request completed
+    req: {
+      "id": 335,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 45604
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:51:32.419] INFO (135): request completed
+    req: {
+      "id": 336,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 53964
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:51:42.568] INFO (135): request completed
+    req: {
+      "id": 337,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 59572
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:51:52.709] INFO (135): request completed
+    req: {
+      "id": 338,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 47214
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:52:02.841] INFO (135): request completed
+    req: {
+      "id": 339,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 48872
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 10
+[18:52:29.844] INFO (135): request completed
+    req: {
+      "id": 340,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60324
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:52:23.236] INFO (135): request completed
+    req: {
+      "id": 341,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 34450
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:52:33.320] INFO (135): request completed
+    req: {
+      "id": 342,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60958
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:52:43.451] INFO (135): request completed
+    req: {
+      "id": 343,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 47160
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 3
+[18:52:53.554] INFO (135): request completed
+    req: {
+      "id": 344,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56752
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:53:03.616] INFO (135): request completed
+    req: {
+      "id": 345,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 60086
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:53:13.749] INFO (135): request completed
+    req: {
+      "id": 346,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 55460
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 10
+[18:53:23.926] INFO (135): request completed
+    req: {
+      "id": 347,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 35218
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:53:34.039] INFO (135): request completed
+    req: {
+      "id": 348,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 42836
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:53:44.160] INFO (135): request completed
+    req: {
+      "id": 349,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 51080
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 7
+[18:53:54.030] INFO (135): request completed
+    req: {
+      "id": 350,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 50834
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 4
+[18:54:04.116] INFO (135): request completed
+    req: {
+      "id": 351,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46538
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:54:14.209] INFO (135): request completed
+    req: {
+      "id": 352,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 53008
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:54:24.303] INFO (135): request completed
+    req: {
+      "id": 353,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 49138
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:54:34.416] INFO (135): request completed
+    req: {
+      "id": 354,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 35288
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 15
+[18:54:44.499] INFO (135): request completed
+    req: {
+      "id": 355,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 43222
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:54:54.476] INFO (135): request completed
+    req: {
+      "id": 356,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46296
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:55:04.594] INFO (135): request completed
+    req: {
+      "id": 357,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 42766
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 9
+[18:55:31.451] INFO (135): request completed
+    req: {
+      "id": 358,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 42948
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:55:24.792] INFO (135): request completed
+    req: {
+      "id": 359,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 55676
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 8
+[18:55:34.980] INFO (135): request completed
+    req: {
+      "id": 360,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 44558
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:55:45.066] INFO (135): request completed
+    req: {
+      "id": 361,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 32922
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 21
+[18:55:55.200] INFO (135): request completed
+    req: {
+      "id": 362,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 54984
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 5
+[18:56:05.338] INFO (135): request completed
+    req: {
+      "id": 363,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 46952
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 6
+[18:56:15.506] INFO (135): request completed
+    req: {
+      "id": 364,
+      "method": "GET",
+      "url": "/health",
+      "query": {},
+      "params": {
+        "path": [
+          "health"
+        ]
+      },
+      "headers": {
+        "host": "127.0.0.1:4012",
+        "user-agent": "Wget",
+        "accept": "*/*",
+        "connection": "close"
+      },
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 42268
+    }
+    service: "orders-service"
+    res: {
+      "statusCode": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "cache-control": "no-cache, no-store, must-revalidate",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "101",
+        "etag": "W/\"65-5fn2EhXoSTMOegV3JtjoHnuo+e8\""
+      }
+    }
+    responseTime: 10

@@ -1,0 +1,191 @@
+﻿docker :  Image 
+ag-ecommerce-users-service Building 
+No linha:1 caractere:1
++ docker compose build frontend 2>&1 
+| Out-File -Encoding utf8 build_er 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpe 
+   cified: ( Image ag-ecomm...rvice  
+   Building :String) [], RemoteExc   
+ eption
+    + FullyQualifiedErrorId : Native 
+   CommandError
+ 
+ Image ag-ecommerce-product-service 
+Building 
+ Image ag-ecommerce-api-gateway 
+Building 
+ Image ag-ecommerce-frontend 
+Building 
+ Image ag-ecommerce-orders-service 
+Building 
+ Image ag-ecommerce-auth-service 
+Building 
+ Image ag-ecommerce-shipping-service 
+Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 3.41kB 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 287B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:20-alpine
+#3 DONE 0.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c
+#5 resolve docker.io/library/node:20-alpine@sha256:f598378b5240225e6beab68fa9f356db1fb8efe55173e6d4d8153113bb8f333c 0.1s done
+#5 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 4.23kB 0.0s done
+#6 DONE 0.0s
+
+#7 [2/6] WORKDIR /app
+#7 CACHED
+
+#8 [3/6] COPY package*.json ./
+#8 CACHED
+
+#9 [4/6] RUN npm ci
+#9 CACHED
+
+#10 [5/6] COPY . .
+#10 CACHED
+
+#11 [6/6] RUN npm run build
+#11 0.995 
+#11 0.995 > aguia-diesel@0.1.0 build
+#11 0.995 > next build
+#11 0.995 
+#11 2.355 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#11 2.357 This information is used to shape Next.js' roadmap and prioritize features.
+#11 2.361 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#11 2.361 https://nextjs.org/telemetry
+#11 2.361 
+#11 2.443 Ôû▓ Next.js 16.2.0 (Turbopack)
+#11 2.446 
+#11 3.040   Creating an optimized production build ...
+#11 14.29 
+#11 14.29 > Build error occurred
+#11 14.31 Error: Turbopack build failed with 3 errors:
+#11 14.31 ./src/app/(main)/auth/login/page.tsx:189:25
+#11 14.31 the name `LoginPage` is defined multiple times
+#11 14.31   [90m187 |[0m }
+#11 14.31   [90m188 |[0m
+#11 14.31 [31m[1m>[0m [90m189 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mLoginPage[0m() {
+#11 14.31   [90m    |[0m                         [31m[1m^^^^^^^^^[0m
+#11 14.31   [90m190 |[0m   [36mreturn[0m (
+#11 14.31   [90m191 |[0m     <[33mSuspense[0m>
+#11 14.31   [90m192 |[0m       <[33mLoginContent[0m />
+#11 14.31 
+#11 14.31 Ecmascript file had an error
+#11 14.31 
+#11 14.31 Import traces:
+#11 14.31   Client Component Browser:
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Client Component Browser]
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+#11 14.31 
+#11 14.31   Client Component SSR:
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Client Component SSR]
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+#11 14.31 
+#11 14.31 
+#11 14.31 ./src/app/(main)/checkout/confirmacao/page.tsx:6:10
+#11 14.31 the name `Suspense` is defined multiple times
+#11 14.31   [90m4 |[0m [36mimport[0m { useSearchParams } [36mfrom[0m [32m"next/navigation"[0m;
+#11 14.31   [90m5 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+#11 14.31 [31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mSuspense[0m } [36mfrom[0m [32m"react"[0m;
+#11 14.31   [90m  |[0m          [31m[1m^^^^^^^^[0m
+#11 14.31   [90m7 |[0m
+#11 14.31   [90m8 |[0m [36mfunction[0m [33mConfirmacaoContent[0m() {
+#11 14.31   [90m9 |[0m   [36mconst[0m params = useSearchParams();
+#11 14.31 
+#11 14.31 Ecmascript file had an error
+#11 14.31 
+#11 14.31 Import traces:
+#11 14.31   Client Component Browser:
+#11 14.31     ./src/app/(main)/checkout/confirmacao/page.tsx [Client Component Browser]
+#11 14.31     ./src/app/(main)/checkout/confirmacao/page.tsx [Server Component]
+#11 14.31 
+#11 14.31   Client Component SSR:
+#11 14.31     ./src/app/(main)/checkout/confirmacao/page.tsx [Client Component SSR]
+#11 14.31     ./src/app/(main)/checkout/confirmacao/page.tsx [Server Component]
+#11 14.31 
+#11 14.31 
+#11 14.31 ./src/app/(main)/auth/login/page.tsx:189:1
+#11 14.31 the name `default` is exported multiple times
+#11 14.31   [90m187 |[0m }
+#11 14.31   [90m188 |[0m
+#11 14.31 [31m[1m>[0m [90m189 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mLoginPage[0m() {
+#11 14.31   [90m    |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+#11 14.31 [31m[1m>[0m [90m190 |[0m   [36mreturn[0m (
+#11 14.31   [90m    |[0m [31m[1m^^^^^^^^^^[0m
+#11 14.31 [31m[1m>[0m [90m191 |[0m     <[33mSuspense[0m>
+#11 14.31   [90m    |[0m [31m[1m^^^^^^^^^^^^^^[0m
+#11 14.31 [31m[1m>[0m [90m192 |[0m       <[33mLoginContent[0m />
+#11 14.31   [90m    |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+#11 14.31 [31m[1m>[0m [90m193 |[0m     </[33mSuspense[0m>
+#11 14.31   [90m    |[0m [31m[1m^^^^^^^^^^^^^^^[0m
+#11 14.31 [31m[1m>[0m [90m194 |[0m   );
+#11 14.31   [90m    |[0m [31m[1m^^^^[0m
+#11 14.31 [31m[1m>[0m [90m195 |[0m }
+#11 14.31   [90m    |[0m [31m[1m^[0m
+#11 14.31   [90m196 |[0m
+#11 14.31 
+#11 14.31 Ecmascript file had an error
+#11 14.31 
+#11 14.31 Import traces:
+#11 14.31   Client Component Browser:
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Client Component Browser]
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+#11 14.31 
+#11 14.31   Client Component SSR:
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Client Component SSR]
+#11 14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+#11 14.31 
+#11 14.31 
+#11 14.31     at <unknown> (./src/app/(main)/auth/login/page.tsx:189:25)
+#11 14.31     at <unknown> (./src/app/(main)/checkout/confirmacao/page.tsx:6:10)
+#11 14.31     at <unknown> (./src/app/(main)/auth/login/page.tsx:189:1)
+#11 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+------
+ > [6/6] RUN npm run build:
+14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+14.31 
+14.31   Client Component SSR:
+14.31     ./src/app/(main)/auth/login/page.tsx [Client Component SSR]
+14.31     ./src/app/(main)/auth/login/page.tsx [Server Component]
+14.31 
+14.31 
+14.31     at <unknown> (./src/app/(main)/auth/login/page.tsx:189:25)
+14.31     at <unknown> (./src/app/(main)/checkout/confirmacao/page.tsx:6:10)
+14.31     at <unknown> (./src/app/(main)/auth/login/page.tsx:189:1)
+------
+Dockerfile:13
+
+--------------------
+
+  11 |     ENV NEXT_PUBLIC_API_URL=$N
+EXT_PUBLIC_API_URL
+
+  12 |     
+
+  13 | >>> RUN npm run build
+
+  14 |     
+
+  15 |     EXPOSE 3000
+
+--------------------
+
+failed to solve: process "/bin/sh -c 
+npm run build" did not complete 
+successfully: exit code: 1
+

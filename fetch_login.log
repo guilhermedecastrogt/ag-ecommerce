@@ -1,0 +1,89 @@
+﻿
+      [35mreq[39m: {
+        "id": 287,
+        "method": "POST",
+>       "url": "/auth/login",
+        "query": {},
+        "params": {
+          "path": [
+            "auth",
+>           "login"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+          "content-length": "50",
+          "sec-ch-ua-platform": 
+"\"Windows\"",
+          "user-agent": "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) 
+AppleWebKit/537.36 (KHTML, like 
+Gecko) Chrome/145.0.0.0 
+Safari/537.36",
+          "sec-ch-ua": 
+"\"Not:A-Brand\";v=\"99\", \"Google 
+Chrome\";v=\"145\", 
+\"Chromium\";v=\"145\"",
+          "content-type": 
+"application/json",
+          "sec-ch-ua-mobile": "?0",
+          "accept": "*/*",
+          "origin": 
+"http://localhost:3000",
+          "sec-fetch-site": 
+"same-site",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-dest": "empty",
+          "referer": 
+"http://localhost:3000/",
+          "accept-encoding": "gzip, 
+deflate, br, zstd",
+          "accept-language": 
+"pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+        },
+      [35mreq[39m: {
+        "id": 287,
+        "method": "POST",
+>       "url": "/auth/login",
+        "query": {},
+        "params": {
+          "path": [
+            "auth",
+>           "login"
+          ]
+        },
+        "headers": {
+          "host": "localhost:3010",
+          "connection": "keep-alive",
+          "content-length": "50",
+          "sec-ch-ua-platform": 
+"\"Windows\"",
+          "user-agent": "Mozilla/5.0 
+(Windows NT 10.0; Win64; x64) 
+AppleWebKit/537.36 (KHTML, like 
+Gecko) Chrome/145.0.0.0 
+Safari/537.36",
+          "sec-ch-ua": 
+"\"Not:A-Brand\";v=\"99\", \"Google 
+Chrome\";v=\"145\", 
+\"Chromium\";v=\"145\"",
+          "content-type": 
+"application/json",
+          "sec-ch-ua-mobile": "?0",
+          "accept": "*/*",
+          "origin": 
+"http://localhost:3000",
+          "sec-fetch-site": 
+"same-site",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-dest": "empty",
+          "referer": 
+"http://localhost:3000/",
+          "accept-encoding": "gzip, 
+deflate, br, zstd",
+          "accept-language": 
+"pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+        },
+
+

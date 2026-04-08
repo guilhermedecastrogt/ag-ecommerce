@@ -5,6 +5,7 @@ import { RedirectOauthUseCase } from './application/use-cases/redirect-oauth.use
 import { HandleOauthCallbackUseCase } from './application/use-cases/handle-oauth-callback.use-case';
 import { CalculateFreightUseCase } from './application/use-cases/calculate-freight.use-case';
 import { PurchaseLabelUseCase } from './application/use-cases/purchase-label.use-case';
+import { GetLabelUseCase } from './application/use-cases/get-label.use-case';
 import { MelhorEnvioClient } from './infrastructure/melhor-envio.client';
 import { LoggerModule } from 'nestjs-pino';
 import { HealthModule } from './health/health.module';
@@ -27,6 +28,7 @@ import { HealthModule } from './health/health.module';
     HandleOauthCallbackUseCase,
     CalculateFreightUseCase,
     PurchaseLabelUseCase,
+    GetLabelUseCase,
   ],
 })
 export class ShippingServiceModule {}
