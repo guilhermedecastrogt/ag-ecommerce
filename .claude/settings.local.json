@@ -8,7 +8,8 @@
       "Bash(curl -s http://localhost:3010/products/categories -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiYWRtaW5AYWd1aWFkaWVzZWwuY29tLmJyIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc1NTg1NzIwLCJleHAiOjE3NzU1ODY2MjB9.qFXF6hB6BTbDvHCkEBKwTRmJpwCX04Svu5u3RXYtf7w')",
       "Bash(xargs grep:*)",
       "Bash(xargs cat:*)",
-      "Bash(docker exec:*)"
+      "Bash(docker exec:*)",
+      "Bash(docker compose:*)"
     ]
   }
 }

@@ -3,14 +3,14 @@ services:
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.1
-    container_name: ms-study-zookeeper
+    container_name: ag-ecommerce-zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     image: confluentinc/cp-kafka:7.6.1
-    container_name: ms-study-kafka
+    container_name: ag-ecommerce-kafka
     ports:
       - "9092:9092"
       - "29092:29092"
@@ -25,20 +25,27 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    restart: on-failure
     depends_on:
       zookeeper:
         condition: service_started
+    healthcheck:
+      test: ['CMD', 'kafka-broker-api-versions', '--bootstrap-server', 'localhost:9092']
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
 
   mysql:
     image: mysql:8.4
-    container_name: ms-study-mysql
+    container_name: ag-ecommerce-mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: study_ms
     ports:
       - '3308:3306'
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-proot']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-proot' ]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -51,7 +58,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-users-service
+    container_name: ag-ecommerce-users-service
     environment:
       PORT: 4001
       HEALTH_PORT: 4011
@@ -62,17 +69,17 @@ services:
       DATABASE_URL: ${DATABASE_URL:-mysql://root:root@mysql:3306/study_ms}
       KAFKA_BROKER: kafka:9092
     # db:push here creates all tables (shared schema)
-    command: sh -c "npm run prisma:generate && npm run db:push && npm run start:users"
+    command: sh -c "npm run prisma:generate && npx prisma db push --accept-data-loss && npm run start:users"
     depends_on:
       mysql:
         condition: service_healthy
       kafka:
-        condition: service_started
+        condition: service_healthy
     ports:
       - '4001:4001'
       - '4011:4011'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:4011/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:4011/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -82,7 +89,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-orders-service
+    container_name: ag-ecommerce-orders-service
     environment:
       PORT: 4002
       HEALTH_PORT: 4012
@@ -97,12 +104,12 @@ services:
       users-service:
         condition: service_healthy
       kafka:
-        condition: service_started
+        condition: service_healthy
     ports:
       - '4002:4002'
       - '4012:4012'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:4012/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:4012/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -112,7 +119,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-auth-service
+    container_name: ag-ecommerce-auth-service
     environment:
       PORT: 4003
       HEALTH_PORT: 4013
@@ -122,19 +129,17 @@ services:
       JWT_SECRET: ${JWT_SECRET:-supersecret_change_me_in_production}
       DATABASE_URL: ${DATABASE_URL:-mysql://root:root@mysql:3306/study_ms}
       KAFKA_BROKER: kafka:9092
-      USERS_SERVICE_HOST: users-service
-      USERS_SERVICE_PORT: 4001
     command: sh -c "npm run prisma:generate && npm run start:auth"
     depends_on:
       users-service:
         condition: service_healthy
       kafka:
-        condition: service_started
+        condition: service_healthy
     ports:
       - '4003:4003'
       - '4013:4013'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:4013/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:4013/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -144,7 +149,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-product-service
+    container_name: ag-ecommerce-product-service
     environment:
       PORT: 4004
       HEALTH_PORT: 4014
@@ -158,12 +163,12 @@ services:
       users-service:
         condition: service_healthy
       kafka:
-        condition: service_started
+        condition: service_healthy
     ports:
       - '4004:4004'
       - '4014:4014'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:4014/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:4014/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -173,7 +178,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-shipping-service
+    container_name: ag-ecommerce-shipping-service
     environment:
       PORT: 4005
       HEALTH_PORT: 4015
@@ -187,35 +192,17 @@ services:
       MELHOR_ENVIO_CLIENT_SECRET: ${MELHOR_ENVIO_CLIENT_SECRET:-secret}
       MELHOR_ENVIO_REDIRECT_URI: http://localhost:3010/shipping/auth/callback
       MELHOR_ENVIO_USER_AGENT: ag-ecommerce (suporte@ecommerce.com)
-      # Serviço de frete padrão: 1=PAC, 2=SEDEX (Correios sandbox)
-      MELHOR_ENVIO_SERVICE_ID: ${MELHOR_ENVIO_SERVICE_ID:-1}
-      # Dados do remetente (empresa)
-      MELHOR_ENVIO_SENDER_NAME: ${MELHOR_ENVIO_SENDER_NAME:-Águia Diesel}
-      MELHOR_ENVIO_SENDER_PHONE: ${MELHOR_ENVIO_SENDER_PHONE:-62999999999}
-      MELHOR_ENVIO_SENDER_EMAIL: ${MELHOR_ENVIO_SENDER_EMAIL:-suporte@aguiadiesel.com.br}
-      MELHOR_ENVIO_SENDER_DOCUMENT: ${MELHOR_ENVIO_SENDER_DOCUMENT:-00000000000000}
-      MELHOR_ENVIO_SENDER_ADDRESS: ${MELHOR_ENVIO_SENDER_ADDRESS:-Rua Exemplo}
-      MELHOR_ENVIO_SENDER_NUMBER: ${MELHOR_ENVIO_SENDER_NUMBER:-1}
-      MELHOR_ENVIO_SENDER_DISTRICT: ${MELHOR_ENVIO_SENDER_DISTRICT:-Centro}
-      MELHOR_ENVIO_SENDER_CITY: ${MELHOR_ENVIO_SENDER_CITY:-Goiânia}
-      MELHOR_ENVIO_SENDER_STATE: ${MELHOR_ENVIO_SENDER_STATE:-GO}
-      MELHOR_ENVIO_SENDER_POSTAL_CODE: ${MELHOR_ENVIO_SENDER_POSTAL_CODE:-74000000}
-      # Dimensões padrão da caixa (cm) e peso padrão por unidade (kg)
-      MELHOR_ENVIO_DEFAULT_HEIGHT: ${MELHOR_ENVIO_DEFAULT_HEIGHT:-10}
-      MELHOR_ENVIO_DEFAULT_WIDTH: ${MELHOR_ENVIO_DEFAULT_WIDTH:-15}
-      MELHOR_ENVIO_DEFAULT_LENGTH: ${MELHOR_ENVIO_DEFAULT_LENGTH:-20}
-      MELHOR_ENVIO_DEFAULT_WEIGHT: ${MELHOR_ENVIO_DEFAULT_WEIGHT:-0.3}
     command: sh -c "npm run prisma:generate && npm run start:shipping"
     depends_on:
       users-service:
         condition: service_healthy
       kafka:
-        condition: service_started
+        condition: service_healthy
     ports:
       - '4005:4005'
       - '4015:4015'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:4015/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:4015/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -225,7 +212,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-api-gateway
+    container_name: ag-ecommerce-api-gateway
     environment:
       PORT: 3000
       NODE_ENV: ${NODE_ENV:-development}
@@ -258,7 +245,7 @@ services:
     ports:
       - '3010:3000'
     healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://127.0.0.1:3000/health']
+      test: [ 'CMD', 'node', '-e', "fetch('http://127.0.0.1:3000/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -270,7 +257,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ms-study-seed
+    container_name: ag-ecommerce-seed
     environment:
       DATABASE_URL: ${DATABASE_URL:-mysql://root:root@mysql:3306/study_ms}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@aguiadiesel.com.br}
@@ -290,7 +277,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3010
-    container_name: ms-study-frontend
+    container_name: ag-ecommerce-frontend
     ports:
       - '3000:3000'
     depends_on:
@@ -305,7 +292,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3010
-    container_name: ms-study-frontend-admin
+    container_name: ag-ecommerce-admin
     ports:
       - '3001:3001'
     depends_on:
