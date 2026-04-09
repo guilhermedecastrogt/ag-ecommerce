@@ -208,29 +208,48 @@ services:
       retries: 5
       start_period: 30s
 
+  shipping-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-study-shipping-service
+    environment:
+      PORT: 4005
+      HEALTH_PORT: 4015
+      DATABASE_URL: mysql://root:root@mysql:3306/study_ms
+      MELHOR_ENVIO_API_URL: https://sandbox.melhorenvio.com.br
+      MELHOR_ENVIO_CLIENT_ID: '8829'
+      MELHOR_ENVIO_CLIENT_SECRET: Wr1i1V1mBE0ql0dIuzxpt3jZK7tv1wNSP66iA4C6
+      MELHOR_ENVIO_REDIRECT_URI: https://herbaceous-lullingly-earnest.ngrok-free.dev/shipping/auth/callback
+      MELHOR_ENVIO_USER_AGENT: ag-ecommerce (suporte@ecommerce.com)
+    command: sh -c "npm run prisma:generate && node dist/apps/shipping-service/main.js"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - '4005:4005'
+      - '4015:4015'
+
   api-gateway:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: ag-ecommerce-api-gateway
     environment:
+      NODE_ENV: production
       PORT: 3000
-      NODE_ENV: ${NODE_ENV:-development}
-      LOG_LEVEL: ${LOG_LEVEL:-info}
-      JWT_SECRET: ${JWT_SECRET:-supersecret_change_me_in_production}
-      # comma-separated: allow both frontend (3000) and admin (3001)
-      FRONTEND_URL: "http://localhost:3000,http://localhost:3001"
+      FRONTEND_URL: http://localhost:3003
       USERS_SERVICE_HOST: users-service
       USERS_SERVICE_PORT: 4001
       ORDERS_SERVICE_HOST: orders-service
       ORDERS_SERVICE_PORT: 4002
       AUTH_SERVICE_HOST: auth-service
       AUTH_SERVICE_PORT: 4003
-      PRODUCT_SERVICE_HOST: product-service
-      PRODUCT_SERVICE_PORT: 4004
+      PRODUCTS_SERVICE_HOST: product-service
+      PRODUCTS_SERVICE_PORT: 4004
       SHIPPING_SERVICE_HOST: shipping-service
       SHIPPING_SERVICE_PORT: 4005
-    command: npm run start:gateway
+    command: sh -c "npm run prisma:generate && node dist/apps/api-gateway/main.js"
     depends_on:
       users-service:
         condition: service_healthy
@@ -240,6 +259,8 @@ services:
         condition: service_healthy
       product-service:
         condition: service_healthy
+      shipping-service:
+        condition: service_started
       shipping-service:
         condition: service_started
     ports:
