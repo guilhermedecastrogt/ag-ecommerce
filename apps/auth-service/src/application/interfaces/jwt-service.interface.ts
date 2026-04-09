@@ -1,8 +1,10 @@
+import { JwtPayload } from './jwt-payload.interface';
+
 export const I_JWT_SERVICE = 'IJwtService';
 
 export interface IJwtService {
-  signAccessToken(payload: any): Promise<string>;
-  signRefreshToken(payload: any, jti: string): Promise<string>;
-  verifyAccessToken(token: string): Promise<any>;
-  verifyRefreshToken(token: string): Promise<any>;
+  signAccessToken(payload: JwtPayload): Promise<string>;
+  signRefreshToken(payload: JwtPayload, jti: string): Promise<string>;
+  verifyAccessToken(token: string): Promise<JwtPayload>;
+  verifyRefreshToken(token: string): Promise<JwtPayload>;
 }

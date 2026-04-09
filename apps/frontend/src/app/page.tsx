@@ -1,6 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+
+// Lock body scroll so fp-container handles scrolling (desktop only)
+function useFullpageScroll() {
+  useEffect(() => {
+    document.documentElement.classList.add("fullpage");
+    return () => document.documentElement.classList.remove("fullpage");
+  }, []);
+}
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Ecommerce from "@/components/Ecommerce";
@@ -33,6 +41,7 @@ const SECTIONS = [
 const DARK_SECTIONS = new Set(["inicio", "agendamento", "emergencia", "rodape"]);
 
 export default function Home() {
+  useFullpageScroll();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);

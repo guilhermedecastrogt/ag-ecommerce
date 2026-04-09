@@ -13,7 +13,7 @@ export class UsersController {
   ) {}
 
   @MessagePattern('users.create')
-  create(@Payload() payload: { name: string; email: string }) {
+  create(@Payload() payload: { id?: number; name: string; email: string }) {
     return this.createUserUseCase.execute(payload);
   }
 

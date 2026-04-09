@@ -26,25 +26,25 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="relative h-[100dvh] flex items-center bg-white overflow-hidden">
+    <div className="relative min-h-auto md:h-[100dvh] flex items-center bg-white overflow-hidden">
       {/* BG accents */}
       <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-blue/10 to-transparent" />
-      <div className="absolute -bottom-16 -left-16 w-[250px] h-[250px] opacity-[0.03] pointer-events-none">
+      <div className="hidden md:block absolute -bottom-16 -left-16 w-[250px] h-[250px] opacity-[0.03] pointer-events-none">
         <div className="absolute inset-0 rounded-[2rem] bg-red rotate-45" />
         <div className="absolute inset-0 rounded-[2rem] bg-red -rotate-45" />
       </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center mb-10 section-content">
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-0">
+        <div className="text-center mb-8 md:mb-10 section-content">
           <span className="inline-block text-red text-xs font-bold tracking-[0.2em] uppercase mb-3">
             Dúvidas Frequentes
           </span>
-          <h2 className="font-[var(--font-display)] text-blue text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em]">
+          <h2 className="font-[var(--font-display)] text-blue text-2xl md:text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-[0.03em]">
             Perguntas e Respostas
           </h2>
         </div>
 
-        <div className="space-y-3 section-content" style={{ transitionDelay: "200ms" }}>
+        <div className="space-y-2 md:space-y-3 section-content" style={{ transitionDelay: "200ms" }}>
           {FAQS.map((faq, i) => (
             <div
               key={i}
@@ -52,21 +52,21 @@ export default function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-neutral-light/50 transition-colors bg-transparent border-0 cursor-pointer"
+                className="w-full flex items-center justify-between gap-3 md:gap-4 p-4 md:p-5 text-left hover:bg-neutral-light/50 transition-colors bg-transparent border-0 cursor-pointer"
                 aria-expanded={openIndex === i}
               >
-                <span className="font-semibold text-blue text-[0.9375rem]">
+                <span className="font-semibold text-blue text-sm md:text-[0.9375rem]">
                   {faq.question}
                 </span>
                 <IconChevronDown
-                  className={`w-5 h-5 text-red shrink-0 transition-transform duration-200 ${
+                  className={`w-4 md:w-5 h-4 md:h-5 text-red shrink-0 transition-transform duration-200 ${
                     openIndex === i ? "rotate-180" : ""
                   }`}
                 />
               </button>
               <div className={`faq-answer ${openIndex === i ? "open" : ""}`}>
                 <div>
-                  <div className="px-5 pb-5 text-neutral-dark/60 text-sm leading-relaxed border-t border-neutral-border pt-4">
+                  <div className="px-4 md:px-5 pb-4 md:pb-5 text-neutral-dark/60 text-xs md:text-sm leading-relaxed border-t border-neutral-border pt-3 md:pt-4">
                     {faq.answer}
                   </div>
                 </div>

@@ -14,7 +14,7 @@ export class Argon2PasswordHasher implements IPasswordHasher {
         return true;
       }
       return false;
-    } catch (err) {
+    } catch {
       return false;
     }
   }

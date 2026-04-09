@@ -1,5 +1,6 @@
 import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
 import { TokenResponseDto } from '../dtos/token-response.dto';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import {
   type IRefreshSessionRepository,
   I_REFRESH_SESSION_REPOSITORY,
@@ -30,14 +31,17 @@ export class RefreshTokenUseCase {
   ) {}
 
   async execute(token: string): Promise<TokenResponseDto> {
-    let payload;
+    let payload: JwtPayload;
     try {
       payload = await this.jwtService.verifyRefreshToken(token);
-    } catch (e) {
+    } catch {
       throw new UnauthorizedException('Invalid or expired refresh token');
     }
 
     const jti = payload.jti;
+    if (!jti) {
+      throw new UnauthorizedException('Invalid refresh token: missing jti');
+    }
     const session = await this.sessionRepository.findByJti(jti);
 
     if (!session) {

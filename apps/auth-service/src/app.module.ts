@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
+import { LoggerModule } from 'nestjs-pino';
+import { ClsModule } from 'nestjs-cls';
 import { JwtModule } from '@nestjs/jwt';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthController } from './presentation/controllers/auth.controller';
@@ -24,12 +26,34 @@ import { JwtServiceWrapper } from './infrastructure/jwt/jwt-service-wrapper';
 
 import { I_EVENT_PUBLISHER } from './application/interfaces/event-publisher.interface';
 import { KafkaEventPublisher } from './infrastructure/events/kafka-event-publisher';
+import { CorrelationInterceptor } from './common/interceptors/correlation.interceptor';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
-    JwtModule.register({
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: process.env.LOG_LEVEL ?? 'info',
+        transport:
+          process.env.NODE_ENV !== 'production'
+            ? { target: 'pino-pretty' }
+            : undefined,
+        customProps: () => ({ service: 'auth-service' }),
+      },
+    }),
+    ClsModule.forRoot({ global: true }),
+    HealthModule,
+    JwtModule.registerAsync({
       global: true,
-      secret: process.env.JWT_SECRET || 'super-secret-key-for-dev',
+      useFactory: () => {
+        const secret = process.env.JWT_SECRET;
+        if (!secret) {
+          throw new Error(
+            'JWT_SECRET environment variable is not defined. Refusing to start.',
+          );
+        }
+        return { secret };
+      },
     }),
     ClientsModule.register([
       {
@@ -42,10 +66,19 @@ import { KafkaEventPublisher } from './infrastructure/events/kafka-event-publish
           producerOnlyMode: true,
         },
       },
+      {
+        name: 'USERS_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.USERS_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.USERS_SERVICE_PORT ?? 4001),
+        },
+      },
     ]),
   ],
   controllers: [AuthController],
   providers: [
+    { provide: APP_INTERCEPTOR, useClass: CorrelationInterceptor },
     {
       provide: APP_PIPE,
       useClass: ZodValidationPipe,
