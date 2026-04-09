@@ -15,10 +15,17 @@ model User {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  total     Float
-  createdAt DateTime @default(now())
+  id              Int         @id @default(autoincrement())
+  userId          Int
+  status          String      @default("PENDING")
+  subTotal        Float
+  shippingFee     Float       @default(0)
+  discount        Float       @default(0)
+  total           Float
+  addressSnapshot String?     @db.Text
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime
+  OrderItem       OrderItem[]
 }
 
 model KnownUser {
@@ -29,21 +36,83 @@ model KnownUser {
 }
 
 model AuthUser {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
+  id           Int              @id @default(autoincrement())
+  email        String           @unique
   passwordHash String
-  status       String   @default("ACTIVE") // ACTIVE, INACTIVE, BLOCKED
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  status       String           @default("ACTIVE")
+  role         String           @default("USER")
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
   sessions     RefreshSession[]
 }
 
 model RefreshSession {
-  id        Int      @id @default(autoincrement())
-  jti       String   @unique // JWT ID
+  id        Int       @id @default(autoincrement())
+  jti       String    @unique
   userId    Int
-  user      AuthUser @relation(fields: [userId], references: [id])
   expiresAt DateTime
   revokedAt DateTime?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  user      AuthUser  @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "RefreshSession_userId_fkey")
+}
+
+model MelhorEnvioToken {
+  id           Int      @id @default(autoincrement())
+  accessToken  String   @db.Text
+  refreshToken String   @db.Text
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String
+  slug    String    @unique
+  Product Product[]
+}
+
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  productId String
+  name      String
+  price     Float
+  quantity  Int
+  Order     Order  @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  price       Float
+  stock       Int      @default(0)
+  description String   @db.Text
+  imageUrl    String
+  categoryId  Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  Category    Category @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId], map: "Product_categoryId_fkey")
+}
+
+model ShipmentLabel {
+  id           Int      @id @default(autoincrement())
+  orderId      Int      @unique
+  cartItemId   String
+  serviceId    Int
+  serviceName  String
+  trackingCode String?
+  labelUrl     String?  @db.Text
+  price        String?
+  status       String   @default("PURCHASED")
+  purchasedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
 }
