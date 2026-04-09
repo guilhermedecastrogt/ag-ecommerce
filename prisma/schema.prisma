@@ -35,6 +35,27 @@ model KnownUser {
   createdAt DateTime
 }
 
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  price       Float
+  stock       Int      @default(0)
+  description String   @db.Text
+  imageUrl    String
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model AuthUser {
   id           Int              @id @default(autoincrement())
   email        String           @unique
@@ -115,4 +136,28 @@ model ShipmentLabel {
   purchasedAt  DateTime @default(now())
   createdAt    DateTime @default(now())
   updatedAt    DateTime
+}
+
+model MelhorEnvioToken {
+  id           Int      @id @default(autoincrement())
+  accessToken  String   @db.Text
+  refreshToken String   @db.Text
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ShipmentLabel {
+  id           Int      @id @default(autoincrement())
+  orderId      Int      @unique
+  cartItemId   String   // ID do item no carrinho do Melhor Envio
+  serviceId    Int
+  serviceName  String
+  trackingCode String?
+  labelUrl     String?  @db.Text
+  price        String?  // valor cobrado (string como retornado pela API)
+  status       String   @default("PURCHASED") // PURCHASED, CANCELLED
+  purchasedAt  DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

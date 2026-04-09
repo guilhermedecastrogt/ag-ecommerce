@@ -1,5 +1,11 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
+import { KnownUserEntity } from '../../domain/entities/known-user.entity';
 import { OrderEntity } from '../../domain/entities/order.entity';
+import { OrderStatus } from '../../domain/entities/order-status.enum';
 import type { KnownUsersRepository } from '../../domain/repositories/known-users.repository';
 import type { OrdersRepository } from '../../domain/repositories/orders.repository';
 import {
@@ -8,6 +14,21 @@ import {
   ORDERS_REPOSITORY,
 } from '../../tokens';
 import type { OrdersEventsPublisher } from '../ports/orders-events.publisher';
+
+export interface CheckoutItemInput {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+export interface CheckoutInput {
+  userId: number;
+  items: CheckoutItemInput[];
+  shippingFee?: number;
+  discount?: number;
+  addressSnapshot?: string | null;
+}
 
 @Injectable()
 export class CreateOrderUseCase {
@@ -20,17 +41,44 @@ export class CreateOrderUseCase {
     private readonly ordersEventsPublisher: OrdersEventsPublisher,
   ) {}
 
-  async execute(input: {
-    userId: number;
-    total: number;
-  }): Promise<OrderEntity> {
-    const knownUser = await this.knownUsersRepository.findById(input.userId);
-
-    if (!knownUser) {
-      throw new NotFoundException('Usuário não encontrado no catálogo local');
+  async execute(input: CheckoutInput): Promise<OrderEntity> {
+    if (!input.items.length) {
+      throw new BadRequestException('O pedido deve conter ao menos um item');
     }
 
-    const createdOrder = await this.ordersRepository.create(input);
+    // Ensure the user exists in the local registry (JWT already validates auth)
+    const knownUser = await this.knownUsersRepository.findById(input.userId);
+    if (!knownUser) {
+      await this.knownUsersRepository.upsert(
+        new KnownUserEntity(input.userId, '', '', new Date()),
+      );
+    }
+
+    const shippingFee = input.shippingFee ?? 0;
+    const discount = input.discount ?? 0;
+
+    const { subTotal, total } = OrderEntity.calculateTotals(
+      input.items,
+      shippingFee,
+      discount,
+    );
+
+    const createdOrder = await this.ordersRepository.create({
+      userId: input.userId,
+      status: OrderStatus.PENDING,
+      subTotal,
+      shippingFee,
+      discount,
+      total,
+      addressSnapshot: input.addressSnapshot ?? null,
+      items: input.items.map((item) => ({
+        productId: item.productId,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+    });
+
     await this.ordersEventsPublisher.publishOrderCreated(createdOrder);
     return createdOrder;
   }

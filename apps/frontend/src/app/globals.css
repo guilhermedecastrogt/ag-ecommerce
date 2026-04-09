@@ -15,7 +15,6 @@
 /* ── Base ───────────────────────────────────────────── */
 html {
   scroll-padding-top: 0;
-  overflow: hidden;
   height: 100%;
 }
 
@@ -25,6 +24,11 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   height: 100%;
+}
+
+/* fullpage mode: landing page locks scroll on body so fp-container handles it */
+html.fullpage,
+html.fullpage body {
   overflow: hidden;
 }
 
@@ -406,8 +410,60 @@ body {
   75% { transform: translate(-15px, -10px); }
 }
 
-/* ── Hide section nav on mobile ──────────────────── */
+/* ── Mobile overrides ────────────────────────────── */
 @media (max-width: 768px) {
+  html,
+  html.fullpage,
+  html.fullpage body {
+    overflow: auto;
+    height: auto;
+  }
+
+  body {
+    overflow: auto;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .section-nav { display: none; }
-  .fp-section { scroll-snap-stop: normal; }
+
+  /* Disable fullpage scroll-snap on mobile */
+  .fp-container {
+    scroll-snap-type: none;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .fp-section {
+    min-height: auto;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+
+  /* All section reveal animations show immediately on mobile */
+  .fp-section .section-content,
+  .fp-section .sc-item,
+  .fp-section .sc-left,
+  .fp-section .sc-right,
+  .fp-section .sc-scale,
+  .fp-section .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0ms !important;
+  }
+
+  /* Smaller buttons on mobile */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8125rem;
+  }
+
+  /* Hide heavy geo shapes on mobile */
+  .geo-shape { display: none; }
+
+  /* Hide progress bar on mobile */
+  .scroll-progress { display: none; }
+
+  /* Section transition overlay — hide on mobile */
+  .fp-section::before { display: none; }
 }
