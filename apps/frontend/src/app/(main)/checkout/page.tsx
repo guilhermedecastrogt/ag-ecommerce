@@ -1,237 +1,381 @@
 "use client";
 
-import { useState, FormEvent, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/contexts/CartContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { checkout } from "@/lib/api";
 
-function formatBRL(v: number) {
-  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+/* ── Types ─────────────────────────────────────── */
+interface CartItem {
+  id: number;
+  name: string;
+  sku: string;
+  price: number;
+  quantity: number;
+  weight: number;   // kg
+  width: number;    // cm
+  height: number;   // cm
+  length: number;   // cm
 }
 
-const SHIPPING_FEE = 29.9;
-const STATES = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
-
-interface Address {
-  name: string; street: string; number: string;
-  neighborhood: string; city: string; state: string; zipCode: string;
+interface FreightOption {
+  id: number;
+  name: string;
+  price: string | null;
+  custom_price: string | null;
+  delivery_time: number;
+  company: string;
+  error: string | null;
 }
 
-function StepBadge({ n, active, done }: { n: number; active: boolean; done: boolean }) {
-  return (
-    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-extrabold shrink-0 transition-colors ${
-      done ? "bg-green-600 text-white" : active ? "bg-blue text-white" : "bg-neutral-border text-blue/40"
-    }`}>
-      {done ? (
-        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-      ) : n}
-    </div>
-  );
+/* ── Demo cart (replace with real cart state/localStorage later) ── */
+const DEMO_CART: CartItem[] = [
+  { id: 1, name: "Injetor Common Rail Bosch CRI2-16", sku: "0445120215", price: 1849.90, quantity: 1, weight: 0.8, width: 20, height: 10, length: 15 },
+  { id: 5, name: "Sensor de Pressão Rail Delphi",      sku: "9307Z521A",  price: 489.90,  quantity: 1, weight: 0.2, width: 10, height: 8,  length: 8  },
+];
+
+const FROM_POSTAL_CODE = "74000000"; // CEP da Águia Diesel (Goiânia-GO)
+
+function formatBRL(v: number | string) {
+  return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+function maskCEP(value: string) {
+  return value.replace(/\D/g, "").slice(0, 8);
+}
+
+/* ── Checkout Page ─────────────────────────────── */
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, totalPrice, clearCart } = useCart();
-  const { isAuthenticated, accessToken, user, isLoading } = useAuth();
 
-  const [address, setAddress] = useState<Address>({
-    name: "", street: "", number: "", neighborhood: "", city: "", state: "", zipCode: "",
-  });
-  const [error, setError] = useState("");
+  const [cep, setCep] = useState("");
+  const [address, setAddress] = useState({ rua: "", numero: "", bairro: "", cidade: "", estado: "" });
+  const [freightOptions, setFreightOptions] = useState<FreightOption[]>([]);
+  const [selectedFreight, setSelectedFreight] = useState<FreightOption | null>(null);
+  const [loadingFreight, setLoadingFreight] = useState(false);
+  const [freightError, setFreightError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) router.push("/auth/login?redirect=/checkout");
-  }, [isLoading, isAuthenticated, router]);
+  const subtotal = DEMO_CART.reduce((s, i) => s + i.price * i.quantity, 0);
+  const shippingFee = selectedFreight ? parseFloat(selectedFreight.custom_price ?? selectedFreight.price ?? "0") : 0;
+  const total = subtotal + shippingFee;
 
-  useEffect(() => {
-    if (!isLoading && isAuthenticated && items.length === 0) router.push("/loja");
-  }, [isLoading, isAuthenticated, items.length, router]);
+  /* ── Calculate freight ──────────────────────── */
+  async function handleCalculateFreight() {
+    if (cep.length !== 8) {
+      setFreightError("Digite um CEP válido com 8 dígitos.");
+      return;
+    }
+    setFreightError("");
+    setFreightOptions([]);
+    setSelectedFreight(null);
+    setLoadingFreight(true);
 
-  useEffect(() => {
-    if (user) setAddress((a) => ({ ...a, name: user.name }));
-  }, [user]);
-
-  const set = (field: keyof Address) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-    setAddress((a) => ({ ...a, [field]: e.target.value }));
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!accessToken) return;
-    setError("");
-    setSubmitting(true);
     try {
-      const order = await checkout(
-        {
-          items: items.map((i) => ({ productId: String(i.productId), name: i.name, price: i.price, quantity: i.quantity })),
-          shippingFee: SHIPPING_FEE,
-          addressSnapshot: JSON.stringify(address),
+      const res = await fetch("/api/shipping/calculate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fromPostalCode: FROM_POSTAL_CODE,
+          toPostalCode: cep,
+          products: DEMO_CART.map((item) => ({
+            weight: item.weight,
+            width: item.width,
+            height: item.height,
+            length: item.length,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err || "Erro ao calcular frete.");
+      }
+
+      const data: FreightOption[] = await res.json();
+      const available = data.filter((o) => !o.error && o.price !== null);
+      if (available.length === 0) {
+        setFreightError("Nenhuma opção de frete disponível para este CEP.");
+      }
+      setFreightOptions(data);
+    } catch (e: unknown) {
+      setFreightError(e instanceof Error ? e.message : "Erro ao calcular frete.");
+    } finally {
+      setLoadingFreight(false);
+    }
+  }
+
+  /* ── Submit order ───────────────────────────── */
+  async function handleSubmitOrder() {
+    if (!selectedFreight) {
+      setSubmitError("Selecione uma opção de frete.");
+      return;
+    }
+
+    setSubmitError("");
+    setSubmitting(true);
+
+    const token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+    if (!token) {
+      router.push("/auth/login");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/orders/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        accessToken
-      );
-      clearCart();
+        body: JSON.stringify({
+          items: DEMO_CART.map((i) => ({
+            productId: i.id,
+            name: i.name,
+            sku: i.sku,
+            price: i.price,
+            quantity: i.quantity,
+          })),
+          shippingFee,
+          discount: 0,
+          addressSnapshot: {
+            postalCode: cep,
+            rua: address.rua,
+            numero: address.numero,
+            bairro: address.bairro,
+            cidade: address.cidade,
+            estado: address.estado,
+            carrier: selectedFreight.company,
+            shippingService: selectedFreight.name,
+          },
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err || "Erro ao criar pedido.");
+      }
+
+      const order = await res.json();
       router.push(`/checkout/confirmacao?orderId=${order.id}`);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Erro ao processar pedido.");
+    } catch (e: unknown) {
+      setSubmitError(e instanceof Error ? e.message : "Erro ao criar pedido.");
     } finally {
       setSubmitting(false);
     }
-  };
-
-  if (isLoading || !isAuthenticated || items.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-light">
-        <div className="w-8 h-8 border-2 border-blue border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
   }
 
-  const total = totalPrice + SHIPPING_FEE;
-
-  const inputClass = "w-full bg-white border border-neutral-border rounded-xl px-4 py-3 text-sm text-blue placeholder-blue/25 focus:outline-none focus:border-blue/50 focus:ring-2 focus:ring-blue/8 transition-all";
-  const labelClass = "block text-[0.68rem] font-extrabold text-blue/45 uppercase tracking-[0.12em] mb-1.5";
-
+  /* ── Render ─────────────────────────────────── */
   return (
-    <div className="min-h-screen bg-neutral-light">
-      {/* Page header */}
-      <div className="bg-white border-b border-neutral-border">
-        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <nav className="flex items-center gap-2 text-[0.65rem] font-bold tracking-[0.12em] uppercase text-blue/35 mb-3">
-            <Link href="/" className="hover:text-blue/60 transition-colors">Início</Link>
-            <span className="text-blue/20">/</span>
-            <Link href="/carrinho" className="hover:text-blue/60 transition-colors">Carrinho</Link>
-            <span className="text-blue/20">/</span>
-            <span className="text-blue/55">Checkout</span>
-          </nav>
+    <div className="h-screen overflow-y-auto bg-neutral-light px-4 py-12">
+      <div className="max-w-[960px] mx-auto">
 
-          {/* Step indicators */}
-          <div className="flex items-center gap-3">
-            <StepBadge n={1} active={false} done={true} />
-            <span className="text-xs font-bold text-blue/40">Carrinho</span>
-            <div className="flex-1 h-[1px] bg-neutral-border max-w-[60px]" />
-            <StepBadge n={2} active={true} done={false} />
-            <span className="text-xs font-bold text-blue">Endereço</span>
-            <div className="flex-1 h-[1px] bg-neutral-border max-w-[60px]" />
-            <StepBadge n={3} active={false} done={false} />
-            <span className="text-xs font-bold text-blue/40">Confirmação</span>
-          </div>
+        {/* Page title */}
+        <div className="mb-8">
+          <Link href="/" className="text-blue/40 text-xs font-semibold hover:text-red transition-colors">← Voltar à loja</Link>
+          <h1 className="font-[var(--font-display)] text-blue text-2xl font-extrabold uppercase tracking-wide mt-2">
+            Finalizar Compra
+          </h1>
         </div>
-      </div>
 
-      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {error && (
-          <div className="mb-6 flex items-start gap-3 bg-red/5 border border-red/15 text-red text-sm px-4 py-3 rounded-xl">
-            <svg className="w-4 h-4 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
-            {error}
-          </div>
-        )}
+        <div className="grid lg:grid-cols-[1fr_360px] gap-6">
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid lg:grid-cols-[1fr_340px] gap-6">
-            {/* Address form */}
+          {/* ── LEFT COLUMN ── */}
+          <div className="space-y-5">
+
+            {/* Cart items */}
             <div className="bg-white rounded-2xl border border-neutral-border overflow-hidden">
-              <div className="px-6 py-5 border-b border-neutral-border flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue/8 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                </div>
-                <h2 className="font-[var(--font-display)] text-blue text-lg font-extrabold uppercase tracking-wide">
+              <div className="px-6 py-4 border-b border-neutral-border">
+                <h2 className="font-[var(--font-display)] text-blue font-extrabold uppercase tracking-wide text-sm">
+                  Itens do pedido
+                </h2>
+              </div>
+              <div className="divide-y divide-neutral-border">
+                {DEMO_CART.map((item) => (
+                  <div key={item.id} className="px-6 py-4 flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue/[0.05] flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 text-blue/25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                        <circle cx="12" cy="12" r="3" /><path d="M12 1v4M12 19v4M1 12h4M19 12h4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-bold text-blue text-sm truncate">{item.name}</p>
+                      <p className="text-blue/40 text-xs font-mono">SKU {item.sku}</p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="font-extrabold text-blue text-sm">{formatBRL(item.price)}</p>
+                      <p className="text-blue/40 text-xs">Qtd: {item.quantity}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Shipping form */}
+            <div className="bg-white rounded-2xl border border-neutral-border overflow-hidden">
+              <div className="px-6 py-4 border-b border-neutral-border">
+                <h2 className="font-[var(--font-display)] text-blue font-extrabold uppercase tracking-wide text-sm">
                   Endereço de entrega
                 </h2>
               </div>
+              <div className="p-6 space-y-4">
 
-              <div className="p-6 grid sm:grid-cols-2 gap-4">
-                <div className="sm:col-span-2">
-                  <label className={labelClass}>Nome do destinatário</label>
-                  <input required value={address.name} onChange={set("name")} placeholder="João da Silva" className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>CEP</label>
-                  <input required value={address.zipCode} onChange={set("zipCode")} placeholder="00000-000" className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Estado</label>
-                  <select required value={address.state} onChange={set("state")} className={inputClass + " bg-white"}>
-                    <option value="">Selecione</option>
-                    {STATES.map((s) => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className={labelClass}>Cidade</label>
-                  <input required value={address.city} onChange={set("city")} placeholder="Goiânia" className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Bairro</label>
-                  <input required value={address.neighborhood} onChange={set("neighborhood")} placeholder="Setor Bueno" className={inputClass} />
-                </div>
-                <div className="sm:col-span-2">
-                  <label className={labelClass}>Logradouro</label>
-                  <input required value={address.street} onChange={set("street")} placeholder="Rua das Flores" className={inputClass} />
-                </div>
-                <div>
-                  <label className={labelClass}>Número</label>
-                  <input required value={address.number} onChange={set("number")} placeholder="123" className={inputClass} />
-                </div>
-              </div>
-            </div>
-
-            {/* Order summary — dark */}
-            <div className="lg:col-span-1">
-              <div className="bg-[#001429] rounded-2xl overflow-hidden sticky top-24">
-                <div className="px-6 py-5 border-b border-white/[0.06]">
-                  <h2 className="font-[var(--font-display)] text-white text-sm font-extrabold uppercase tracking-[0.15em]">
-                    Resumo do pedido
-                  </h2>
-                </div>
-
-                <div className="px-6 py-4 space-y-2.5 border-b border-white/[0.06]">
-                  {items.map((item) => (
-                    <div key={item.productId} className="flex justify-between text-sm">
-                      <span className="text-white/40 truncate max-w-[160px]">
-                        <span className="text-white/60 font-bold">{item.quantity}×</span> {item.name}
-                      </span>
-                      <span className="text-white/60 font-semibold shrink-0 ml-2">{formatBRL(item.price * item.quantity)}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="px-6 py-5 space-y-2.5">
-                  <div className="flex justify-between text-sm text-white/40">
-                    <span>Subtotal</span>
-                    <span className="text-white/60 font-semibold">{formatBRL(totalPrice)}</span>
+                {/* CEP row */}
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">CEP *</label>
+                    <input
+                      type="text"
+                      placeholder="00000000"
+                      value={cep}
+                      onChange={(e) => setCep(maskCEP(e.target.value))}
+                      maxLength={8}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue font-mono placeholder:text-blue/20 focus:outline-none focus:border-blue/40"
+                    />
                   </div>
-                  <div className="flex justify-between text-sm text-white/40">
-                    <span>Frete</span>
-                    <span className="text-white/60 font-semibold">{formatBRL(SHIPPING_FEE)}</span>
+                  <div className="flex items-end">
+                    <button
+                      onClick={handleCalculateFreight}
+                      disabled={loadingFreight || cep.length !== 8}
+                      className="px-5 py-2.5 bg-blue text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {loadingFreight ? "Calculando..." : "Calcular frete"}
+                    </button>
                   </div>
-                  <div className="flex justify-between pt-3 border-t border-white/[0.06]">
-                    <span className="font-[var(--font-display)] text-white font-extrabold uppercase tracking-wider text-sm">Total</span>
-                    <span className="font-[var(--font-display)] text-white font-extrabold text-2xl">{formatBRL(total)}</span>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 bg-red text-white font-extrabold uppercase tracking-[0.1em] text-sm py-4 rounded-xl hover:bg-red-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-                  >
-                    {submitting ? (
-                      <>
-                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Processando...
-                      </>
-                    ) : (
-                      <>
-                        Confirmar pedido
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                      </>
-                    )}
-                  </button>
                 </div>
+
+                {/* Address fields */}
+                <div className="grid grid-cols-[1fr_100px] gap-3">
+                  <div>
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">Rua</label>
+                    <input type="text" placeholder="Nome da rua" value={address.rua} onChange={(e) => setAddress({ ...address, rua: e.target.value })}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue placeholder:text-blue/20 focus:outline-none focus:border-blue/40" />
+                  </div>
+                  <div>
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">Número</label>
+                    <input type="text" placeholder="Nº" value={address.numero} onChange={(e) => setAddress({ ...address, numero: e.target.value })}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue placeholder:text-blue/20 focus:outline-none focus:border-blue/40" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">Bairro</label>
+                    <input type="text" placeholder="Bairro" value={address.bairro} onChange={(e) => setAddress({ ...address, bairro: e.target.value })}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue placeholder:text-blue/20 focus:outline-none focus:border-blue/40" />
+                  </div>
+                  <div>
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">Cidade</label>
+                    <input type="text" placeholder="Cidade" value={address.cidade} onChange={(e) => setAddress({ ...address, cidade: e.target.value })}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue placeholder:text-blue/20 focus:outline-none focus:border-blue/40" />
+                  </div>
+                  <div>
+                    <label className="block text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider mb-1">Estado</label>
+                    <input type="text" placeholder="UF" maxLength={2} value={address.estado} onChange={(e) => setAddress({ ...address, estado: e.target.value.toUpperCase() })}
+                      className="w-full border border-neutral-border rounded-xl px-4 py-2.5 text-sm text-blue placeholder:text-blue/20 focus:outline-none focus:border-blue/40" />
+                  </div>
+                </div>
+
+                {/* Freight error */}
+                {freightError && (
+                  <p className="text-red text-xs font-semibold bg-red/5 px-4 py-2.5 rounded-xl">{freightError}</p>
+                )}
+
+                {/* Freight options */}
+                {freightOptions.length > 0 && (
+                  <div className="space-y-2 pt-2">
+                    <p className="text-[0.65rem] font-bold text-blue/50 uppercase tracking-wider">Opções de frete</p>
+                    {freightOptions.map((opt) => {
+                      const price = parseFloat(opt.custom_price ?? opt.price ?? "0");
+                      const unavailable = !!opt.error || opt.price === null;
+                      const isSelected = selectedFreight?.id === opt.id;
+
+                      return (
+                        <button
+                          key={opt.id}
+                          disabled={unavailable}
+                          onClick={() => !unavailable && setSelectedFreight(opt)}
+                          className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl border text-left transition-all ${
+                            unavailable
+                              ? "border-neutral-border bg-neutral-light opacity-50 cursor-not-allowed"
+                              : isSelected
+                              ? "border-blue bg-blue/5 shadow-sm"
+                              : "border-neutral-border bg-white hover:border-blue/40 hover:bg-blue/[0.02]"
+                          }`}
+                        >
+                          {/* Radio dot */}
+                          <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${isSelected ? "border-blue" : "border-blue/20"}`}>
+                            {isSelected && <div className="w-2 h-2 rounded-full bg-blue" />}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-bold text-blue text-sm">{opt.name}</p>
+                            <p className="text-blue/40 text-xs">{opt.company} · {unavailable ? (opt.error ?? "Indisponível") : `${opt.delivery_time} dias úteis`}</p>
+                          </div>
+                          {!unavailable && (
+                            <span className="font-extrabold text-blue text-sm shrink-0">{formatBRL(price)}</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        </form>
+
+          {/* ── RIGHT COLUMN — Order summary ── */}
+          <div className="space-y-4">
+            <div className="bg-white rounded-2xl border border-neutral-border p-6 sticky top-6">
+              <h2 className="font-[var(--font-display)] text-blue font-extrabold uppercase tracking-wide text-sm mb-5">
+                Resumo do pedido
+              </h2>
+
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between text-blue/60">
+                  <span>Subtotal ({DEMO_CART.reduce((s, i) => s + i.quantity, 0)} itens)</span>
+                  <span>{formatBRL(subtotal)}</span>
+                </div>
+                <div className="flex justify-between text-blue/60">
+                  <span>Frete</span>
+                  <span>{selectedFreight ? formatBRL(shippingFee) : <span className="text-blue/30 text-xs">—</span>}</span>
+                </div>
+                <div className="flex justify-between text-blue/60">
+                  <span>Desconto</span>
+                  <span className="text-green-600">—</span>
+                </div>
+                <div className="h-px bg-neutral-border" />
+                <div className="flex justify-between font-extrabold text-blue text-base">
+                  <span>Total</span>
+                  <span>{formatBRL(total)}</span>
+                </div>
+              </div>
+
+              {selectedFreight && (
+                <div className="mt-4 bg-blue/[0.04] rounded-xl px-4 py-3">
+                  <p className="text-[0.6rem] font-bold text-blue/40 uppercase tracking-wider mb-0.5">Entrega via</p>
+                  <p className="text-blue text-xs font-bold">{selectedFreight.company} — {selectedFreight.name}</p>
+                  <p className="text-blue/50 text-xs">{selectedFreight.delivery_time} dias úteis</p>
+                </div>
+              )}
+
+              {submitError && (
+                <p className="mt-3 text-red text-xs font-semibold bg-red/5 px-4 py-2.5 rounded-xl">{submitError}</p>
+              )}
+
+              <button
+                onClick={handleSubmitOrder}
+                disabled={submitting || !selectedFreight}
+                className="mt-5 w-full bg-blue text-white font-extrabold uppercase tracking-[0.08em] text-sm py-3.5 rounded-xl hover:bg-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {submitting ? "Processando..." : "Finalizar Pedido"}
+              </button>
+
+              <p className="text-center text-blue/30 text-[0.6rem] mt-3">
+                Ao finalizar você concorda com os termos de compra.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
