@@ -208,28 +208,6 @@ services:
       retries: 5
       start_period: 30s
 
-  shipping-service:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ms-study-shipping-service
-    environment:
-      PORT: 4005
-      HEALTH_PORT: 4015
-      DATABASE_URL: mysql://root:root@mysql:3306/study_ms
-      MELHOR_ENVIO_API_URL: https://sandbox.melhorenvio.com.br
-      MELHOR_ENVIO_CLIENT_ID: '8829'
-      MELHOR_ENVIO_CLIENT_SECRET: Wr1i1V1mBE0ql0dIuzxpt3jZK7tv1wNSP66iA4C6
-      MELHOR_ENVIO_REDIRECT_URI: https://herbaceous-lullingly-earnest.ngrok-free.dev/shipping/auth/callback
-      MELHOR_ENVIO_USER_AGENT: ag-ecommerce (suporte@ecommerce.com)
-    command: sh -c "npm run prisma:generate && node dist/apps/shipping-service/main.js"
-    depends_on:
-      mysql:
-        condition: service_healthy
-    ports:
-      - '4005:4005'
-      - '4015:4015'
-
   api-gateway:
     build:
       context: .
@@ -259,8 +237,6 @@ services:
         condition: service_healthy
       product-service:
         condition: service_healthy
-      shipping-service:
-        condition: service_started
       shipping-service:
         condition: service_started
     ports:
