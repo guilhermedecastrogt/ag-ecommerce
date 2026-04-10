@@ -14,46 +14,11 @@ model User {
   createdAt DateTime @default(now())
 }
 
-model Order {
-  id              Int         @id @default(autoincrement())
-  userId          Int
-  status          String      @default("PENDING")
-  subTotal        Float
-  shippingFee     Float       @default(0)
-  discount        Float       @default(0)
-  total           Float
-  addressSnapshot String?     @db.Text
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime
-  OrderItem       OrderItem[]
-}
-
 model KnownUser {
   id        Int      @id
   name      String
   email     String   @unique
   createdAt DateTime
-}
-
-model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  slug     String    @unique
-  products Product[]
-}
-
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  slug        String   @unique
-  price       Float
-  stock       Int      @default(0)
-  description String   @db.Text
-  imageUrl    String
-  categoryId  Int
-  category    Category @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model AuthUser {
@@ -79,32 +44,11 @@ model RefreshSession {
   @@index([userId], map: "RefreshSession_userId_fkey")
 }
 
-model MelhorEnvioToken {
-  id           Int      @id @default(autoincrement())
-  accessToken  String   @db.Text
-  refreshToken String   @db.Text
-  expiresAt    DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime
-}
-
 model Category {
-  id      Int       @id @default(autoincrement())
-  name    String
-  slug    String    @unique
-  Product Product[]
-}
-
-model OrderItem {
-  id        Int    @id @default(autoincrement())
-  orderId   Int
-  productId String
-  name      String
-  price     Float
-  quantity  Int
-  Order     Order  @relation(fields: [orderId], references: [id])
-
-  @@index([orderId])
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  products Product[]
 }
 
 model Product {
@@ -116,26 +60,37 @@ model Product {
   description String   @db.Text
   imageUrl    String
   categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
-  Category    Category @relation(fields: [categoryId], references: [id])
+  updatedAt   DateTime @updatedAt
 
   @@index([categoryId], map: "Product_categoryId_fkey")
 }
 
-model ShipmentLabel {
-  id           Int      @id @default(autoincrement())
-  orderId      Int      @unique
-  cartItemId   String
-  serviceId    Int
-  serviceName  String
-  trackingCode String?
-  labelUrl     String?  @db.Text
-  price        String?
-  status       String   @default("PURCHASED")
-  purchasedAt  DateTime @default(now())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime
+model Order {
+  id              Int         @id @default(autoincrement())
+  userId          Int
+  status          String      @default("PENDING")
+  subTotal        Float
+  shippingFee     Float       @default(0)
+  discount        Float       @default(0)
+  total           Float
+  addressSnapshot String?     @db.Text
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+}
+
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  productId String
+  name      String
+  price     Float
+  quantity  Int
+  order     Order  @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
 }
 
 model MelhorEnvioToken {
@@ -150,13 +105,13 @@ model MelhorEnvioToken {
 model ShipmentLabel {
   id           Int      @id @default(autoincrement())
   orderId      Int      @unique
-  cartItemId   String   // ID do item no carrinho do Melhor Envio
+  cartItemId   String
   serviceId    Int
   serviceName  String
   trackingCode String?
   labelUrl     String?  @db.Text
-  price        String?  // valor cobrado (string como retornado pela API)
-  status       String   @default("PURCHASED") // PURCHASED, CANCELLED
+  price        String?
+  status       String   @default("PURCHASED")
   purchasedAt  DateTime @default(now())
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
