@@ -43,7 +43,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
       MYSQL_DATABASE: study_ms
     ports:
-      - '3308:3306'
+      - '3309:3306'
     healthcheck:
       test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-proot' ]
       interval: 5s
@@ -279,7 +279,7 @@ services:
       - '3000:3000'
     depends_on:
       api-gateway:
-        condition: service_healthy
+        condition: service_started
     environment:
       NODE_ENV: production
 
@@ -294,7 +294,7 @@ services:
       - '3001:3001'
     depends_on:
       api-gateway:
-        condition: service_healthy
+        condition: service_started
       seed:
         condition: service_completed_successfully
     environment:
