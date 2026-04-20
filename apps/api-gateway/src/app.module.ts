@@ -9,6 +9,7 @@ import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { ShippingModule } from './shipping/shipping.module';
+import { PaymentsModule } from './payments/payments.module';
 import { CorrelationIdMiddleware } from './common/middlewares/correlation-id.middleware';
 
 @Module({
@@ -46,6 +47,7 @@ import { CorrelationIdMiddleware } from './common/middlewares/correlation-id.mid
     AuthModule,
     ProductsModule,
     ShippingModule,
+    PaymentsModule,
   ],
   providers: [
     {

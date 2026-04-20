@@ -56,4 +56,24 @@ export class OrdersController {
   ) {
     await this.syncKnownUserUseCase.execute(payload);
   }
+
+  @EventPattern('payments.payment-approved.v1')
+  async handlePaymentApproved(
+    @Payload() payload: { orderId: number; externalId: string; paidAt: string },
+  ) {
+    await this.updateOrderStatusUseCase.execute({
+      orderId: payload.orderId,
+      status: 'PAID',
+    });
+  }
+
+  @EventPattern('payments.payment-failed.v1')
+  async handlePaymentFailed(
+    @Payload() payload: { orderId: number; reason: string },
+  ) {
+    await this.updateOrderStatusUseCase.execute({
+      orderId: payload.orderId,
+      status: 'CANCELLED',
+    });
+  }
 }
