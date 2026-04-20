@@ -21,10 +21,25 @@ import { withResilience } from '../common/helpers/resilience';
 import type { CheckoutDto } from './dtos/checkout.dto';
 import type { OrderDto } from './dtos/order.dto';
 
+interface PaymentResponseDto {
+  id: number;
+  orderId: number;
+  method: string;
+  status: string;
+  pixQrCode?: string;
+  pixQrCodeUrl?: string;
+  pixExpiresAt?: string;
+  boletoUrl?: string;
+  boletoBarcode?: string;
+  boletoExpiresAt?: string;
+  checkoutUrl?: string;
+}
+
 @Controller('orders')
 export class OrdersController {
   constructor(
     @Inject('ORDERS_SERVICE') private readonly ordersClient: ClientProxy,
+    @Inject('PAYMENT_SERVICE') private readonly paymentClient: ClientProxy,
     private readonly cls: ClsService,
   ) {}
 
@@ -35,8 +50,8 @@ export class OrdersController {
   async checkout(
     @Body() payload: CheckoutDto,
     @Req() req: { user: { sub: number } },
-  ): Promise<OrderDto> {
-    return firstValueFrom(
+  ): Promise<{ order: OrderDto; payment: PaymentResponseDto }> {
+    const order = await firstValueFrom(
       withResilience(
         sendWithContext<OrderDto>(
           this.ordersClient,
@@ -53,6 +68,33 @@ export class OrdersController {
         { timeoutMs: 8000, retries: 1 },
       ),
     );
+
+    const amountInCents = Math.round(order.total * 100);
+    const payment = await firstValueFrom(
+      withResilience(
+        sendWithContext<PaymentResponseDto>(
+          this.paymentClient,
+          'payments.create',
+          {
+            orderId: order.id,
+            amount: amountInCents,
+            method: payload.paymentMethod,
+            provider: payload.provider ?? 'pagarme',
+            customer: payload.customer,
+            items: payload.items.map((item) => ({
+              productId: item.productId,
+              name: item.name,
+              amount: Math.round(item.price * 100),
+              quantity: item.quantity,
+            })),
+          },
+          this.cls,
+        ),
+        { timeoutMs: 10000, retries: 0 },
+      ),
+    );
+
+    return { order, payment };
   }
 
   @UseGuards(JwtAuthGuard)

@@ -29,6 +29,14 @@ import { OrdersController } from './orders.controller';
           port: Number(process.env.PRODUCT_SERVICE_PORT ?? 4004),
         },
       },
+      {
+        name: 'PAYMENT_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: process.env.PAYMENT_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.PAYMENT_SERVICE_PORT ?? 4006),
+        },
+      },
     ]),
   ],
   controllers: [OrdersController],
