@@ -251,9 +251,9 @@ services:
       dockerfile: Dockerfile
     container_name: ag-ecommerce-api-gateway
     environment:
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV:-development}
       PORT: 3000
-      FRONTEND_URL: http://localhost:3003
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000,http://localhost:3001}
       USERS_SERVICE_HOST: users-service
       USERS_SERVICE_PORT: 4001
       ORDERS_SERVICE_HOST: orders-service
@@ -269,7 +269,7 @@ services:
       KAFKA_BROKER: kafka:9092
       PAGARME_WEBHOOK_SECRET: ${PAGARME_WEBHOOK_SECRET:-}
       PAGBANK_API_KEY: ${PAGBANK_API_KEY:-}
-    command: sh -c "npm run prisma:generate && node dist/apps/api-gateway/main.js"
+    command: sh -c "npm run prisma:generate && npm run start:gateway"
     depends_on:
       users-service:
         condition: service_healthy
