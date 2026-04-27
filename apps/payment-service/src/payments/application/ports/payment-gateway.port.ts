@@ -9,6 +9,16 @@ export interface CreateChargeInput {
     email: string;
     document?: string; // CPF
     phone?: string;
+    address?: {
+      street: string;
+      number: string;
+      locality: string;
+      city: string;
+      region: string;
+      region_code: string;
+      country: string;
+      postal_code: string;
+    };
   };
   items: Array<{
     productId: string;

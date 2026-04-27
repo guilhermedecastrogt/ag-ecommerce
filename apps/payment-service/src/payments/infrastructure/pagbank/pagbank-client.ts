@@ -1,11 +1,72 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-export interface PagBankChargeRequest {
+export interface PagBankOrderRequest {
   reference_id: string;
-  description: string;
-  amount: { value: number; currency: 'BRL' };
-  payment_method: unknown;
+  customer: {
+    name: string;
+    email: string;
+    tax_id?: string;
+  };
+  items: Array<{ reference_id: string; name: string; quantity: number; unit_amount: number }>;
+  // PIX
+  qr_codes?: Array<{ amount: { value: number }; expiration_date: string }>;
+  // Boleto
+  charges?: Array<{
+    reference_id: string;
+    description: string;
+    amount: { value: number; currency: 'BRL' };
+    payment_method: {
+      type: 'BOLETO';
+      boleto: {
+        due_date: string;
+        instruction_lines?: { line_1?: string; line_2?: string };
+        holder: {
+          name: string;
+          email: string;
+          tax_id?: string;
+          address?: {
+            street: string;
+            number: string;
+            locality: string;
+            city: string;
+            region: string;
+            region_code: string;
+            country: string;
+            postal_code: string;
+          };
+        };
+      };
+    };
+  }>;
   notification_urls?: string[];
+}
+
+export interface PagBankOrderResponse {
+  id: string;
+  reference_id: string;
+  status?: string;
+  // PIX
+  qr_codes?: Array<{
+    id: string;
+    text: string;
+    expiration_date: string;
+    links?: Array<{ rel: string; href: string }>;
+  }>;
+  // Boleto
+  charges?: Array<{
+    id: string;
+    status: string;
+    payment_method?: {
+      type: string;
+      boleto?: {
+        id: string;
+        barcode: string;
+        formatted_barcode: string;
+        due_date: string;
+      };
+    };
+    links?: Array<{ rel: string; href: string; media?: string }>;
+  }>;
 }
 
 export interface PagBankCheckoutRequest {
@@ -21,26 +82,6 @@ export interface PagBankCheckoutRequest {
   redirect_url?: string;
   return_url?: string;
   notification_urls?: string[];
-}
-
-export interface PagBankChargeResponse {
-  id: string;
-  reference_id: string;
-  status: string;
-  qr_codes?: Array<{
-    id: string;
-    text: string;
-    expiration_date: string;
-    links?: Array<{ rel: string; href: string }>;
-  }>;
-  payment_method?: {
-    boleto?: {
-      barcode: string;
-      formatted_barcode: string;
-      due_date: string;
-      links?: Array<{ rel: string; href: string }>;
-    };
-  };
 }
 
 export interface PagBankCheckoutResponse {
@@ -61,8 +102,8 @@ export class PagBankClient {
     this.authHeader = `Bearer ${process.env.PAGBANK_API_KEY ?? ''}`;
   }
 
-  async createCharge(data: PagBankChargeRequest): Promise<PagBankChargeResponse> {
-    const url = `${this.baseUrl}/charges`;
+  async createOrder(data: PagBankOrderRequest): Promise<PagBankOrderResponse> {
+    const url = `${this.baseUrl}/orders`;
     this.logger.debug(`POST ${url} reference_id=${data.reference_id}`);
 
     const response = await fetch(url, {
@@ -80,7 +121,7 @@ export class PagBankClient {
       throw new Error(`PagBank API error ${response.status}: ${body}`);
     }
 
-    return response.json() as Promise<PagBankChargeResponse>;
+    return response.json() as Promise<PagBankOrderResponse>;
   }
 
   async createCheckout(data: PagBankCheckoutRequest): Promise<PagBankCheckoutResponse> {
