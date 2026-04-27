@@ -10,6 +10,16 @@ export interface CreatePaymentInput {
     email: string;
     document?: string;
     phone?: string;
+    address?: {
+      street: string;
+      number: string;
+      locality: string;
+      city: string;
+      region: string;
+      region_code: string;
+      country: string;
+      postal_code: string;
+    };
   };
   items: Array<{
     productId: string;
