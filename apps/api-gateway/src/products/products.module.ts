@@ -9,8 +9,8 @@ import { ProductsController } from './products.controller';
         name: 'PRODUCT_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: process.env.PRODUCT_SERVICE_HOST ?? 'localhost',
-          port: Number(process.env.PRODUCT_SERVICE_PORT ?? 4004),
+          host: process.env.PRODUCTS_SERVICE_HOST ?? 'localhost',
+          port: Number(process.env.PRODUCTS_SERVICE_PORT ?? 4004),
         },
       },
       {

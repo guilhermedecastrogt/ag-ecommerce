@@ -12,7 +12,15 @@
       "Bash(docker compose:*)",
       "Bash(npx jest *)",
       "Bash(node test-payment-gateways.mjs)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(ngrok version *)",
+      "Bash(brew --version)",
+      "Bash(ngrok config *)",
+      "Bash(ngrok http *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s http://localhost:4040/api/tunnels)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(t['public_url']\\) for t in d['tunnels']]\")",
+      "Read(//private/tmp/**)"
     ]
   }
 }
