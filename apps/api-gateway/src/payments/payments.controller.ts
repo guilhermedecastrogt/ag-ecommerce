@@ -5,10 +5,10 @@ import {
   Inject,
   Logger,
   Post,
-  RawBodyRequest,
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
+import type { RawBodyRequest } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import type { Request } from 'express';
 import { createHmac, timingSafeEqual } from 'crypto';
